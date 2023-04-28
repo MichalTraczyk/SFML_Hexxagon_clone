@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/ProjektyCpp/Hexxagon/cmake-build-debug",
-		"source" : "C:/ProjektyCpp/Hexxagon"
+		"build" : "C:/Projektycpp/Hexxagon/cmake-build-debug",
+		"source" : "C:/Projektycpp/Hexxagon"
 	},
 	"version" : 
 	{

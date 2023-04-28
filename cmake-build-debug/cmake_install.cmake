@@ -1,4 +1,4 @@
-# Install script for directory: C:/ProjektyCpp/Hexxagon
+# Install script for directory: C:/Projektycpp/Hexxagon
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/ProjektyCpp/Hexxagon/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Projektycpp/Hexxagon/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

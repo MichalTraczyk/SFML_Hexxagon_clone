@@ -12,9 +12,24 @@ class Board
 {
 public:
     Board(sf::RenderWindow &w);
-    void drawHex(Hex& h);
-
+    void drawBoard();
 private:
+
+    sf::Font font;
+    void buildBoard();
+    void drawHex(Hex& h);
+    void offsetHexes();
+    std::vector<std::vector<Hex>> boardState={
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {},
+            {}
+    };
     const int radius = 50;
 
     sf::RenderWindow &window;
