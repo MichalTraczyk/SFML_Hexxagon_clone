@@ -1,0 +1,3 @@
+C:/ProjektyCpp/Hexxagon/cmake-build-debug/CMakeFiles/Hexxagon.dir
+C:/ProjektyCpp/Hexxagon/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/ProjektyCpp/Hexxagon/cmake-build-debug/CMakeFiles/rebuild_cache.dir
