@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include "Board/Board.h"
-#include "Board/Hex.h"
+#include "../Board/Board.h"
+#include "../Board/Hex.h"
 #include "iostream"
 #include "Owner.h"
 int main()
