@@ -3,7 +3,7 @@ project(Hexxagon)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(Hexxagon src/main.cpp src/Board/Board.cpp src/Board/Board.h src/Board/Hex.cpp src/Board/Hex.h src/Owner.h)
+add_executable(Hexxagon src/main.cpp src/Board/Board.cpp src/Board/Board.h src/Board/Hex.cpp src/Board/Hex.h src/Owner.h src/Background.cpp src/Background.h)
 
 set(SFML_STATIC_LIBRARIES TRUE)
 set(SFML_DIR C:/SFML/lib/cmake/SFML)

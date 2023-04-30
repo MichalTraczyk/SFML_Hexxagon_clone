@@ -16,10 +16,15 @@ Board::Board(sf::RenderWindow &w) : window(w)
 
     if (!font.loadFromFile("arial.ttf"))
     {
-        std::cout<<"ERROR";
+        std::cout<<"ERROR LOADING THE FONT";
     }
+    //Creates vector of hexes
     buildBoard();
+
+    //Offsets hexes so the board is in the middle
     offsetHexes();
+
+    //Draws every hex according to its state and position
     drawBoard();
 }
 
@@ -60,8 +65,10 @@ void Board::drawHex(Hex& h)
     {
         float angle_deg = 60*i;
         float angle_rad = 3.1415 / 180 * angle_deg;
-        float px = h.getPosX() + radius*cos(angle_rad);
-        float py = h.getPosY() + radius* sin(angle_rad);
+        //float px = h.getPosX() + radius*cos(angle_rad);
+        float px = radius*cos(angle_rad);
+        //float py = h.getPosY() + radius* sin(angle_rad);
+        float py = radius* sin(angle_rad);
         shape.setPoint(i, sf::Vector2f(px, py));
     }
     shape.setOutlineColor(sf::Color::White);
@@ -112,12 +119,18 @@ void Board::buildBoard()
 void Board::offsetHexes()
 {
     int xSize = window.getSize().x;
-    int remaining = xSize - radius*18;
+    int boardSize = boardState[8][0].getWindowPosition().x - boardState[0][0].getWindowPosition().x;
+    int remainingSize = xSize - boardSize;
+
+    int distance = boardState[0][0].getWindowPosition().x;
+    int moveDistance = remainingSize/2 - distance;
+
+
     for (int i = 0; i < boardState.size(); i++)
     {
         for (int j = 0;j<boardState[i].size();j++)
         {
-            boardState[i][j].Move(sf::Vector2<int>(remaining/2,0));
+            boardState[i][j].Move(sf::Vector2<int>(moveDistance,0));
         }
     }
 }
