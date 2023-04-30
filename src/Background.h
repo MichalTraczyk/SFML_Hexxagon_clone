@@ -14,12 +14,12 @@ private:
     sf::Clock clock;
 
     sf::RenderWindow window;
-    std::vector<sf::ConvexShape> stars;
-    int starsCount;
-    float maxSize = 5;
-    float minSize = 10;
-    float minSpeed = 50;
-    float maxSpeed = 200;
+    std::vector<sf::CircleShape*> stars;
+    int starsCount = 5;
+    int maxSize = 5;
+    int minSize = 10;
+    int minSpeed = 50;
+    int maxSpeed = 200;
 };
 
 
