@@ -8,13 +8,17 @@
 #include <SFML/Graphics.hpp>
 #include "Hex.h"
 #include "../Owner.h"
+
 class Board
 {
 public:
     Board(sf::RenderWindow &w);
     void drawBoard();
+    void OnMouseClicked(sf::Vector2<int> position);
+
 private:
 
+    Owner currentPlayerTurn = Owner::PLAYER1;
     sf::Font font;
     void buildBoard();
     void drawHex(Hex& h);
@@ -30,8 +34,17 @@ private:
             {},
             {}
     };
+
     const int radius = 50;
 
+    Hex* selectedHex= nullptr;
     sf::RenderWindow &window;
+
+    void selectHex(Hex &h);
+    std::map<Hex *, int> findCloseHexes(Hex &h);
+
+    void move(Hex &from, Hex &where, bool duplicate);
+
+    void resetHexesState();
 };
 #endif //HEXXAGON_BOARD_H

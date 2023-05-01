@@ -38,49 +38,137 @@ void Board::drawBoard() {
         }
     }
 }
+void Board::OnMouseClicked(sf::Vector2<int> position)
+{
+    for(int i = 0; i<boardState.size();i++)
+    {
+        for(int j = 0; j<boardState[i].size();j++)
+        {
+            if(boardState[i][j].contains(position))
+            {
+                if( boardState[i][j].getOwner() == currentPlayerTurn)
+                    selectHex(boardState[i][j]);
+                else if(boardState[i][j].getState() == HexState::CLOSE)
+                {
+                    move(*selectedHex, boardState[i][j], false);
+                }
+                else if(boardState[i][j].getState() == HexState::VERY_CLOSE)
+                {
+                    move(*selectedHex, boardState[i][j], true);
+                }
+            }
+        }
+    }
+}
+void Board::move(Hex &from, Hex &where, bool duplicate)
+{
+    where.setOwner(from.getOwner());
+
+    if(!duplicate)
+    {
+        from.setOwner(Owner::NO_ONE);
+    }
+    resetHexesState();
+    for(auto i : findCloseHexes(where))
+    {
+        if(i.first->getOwner() != Owner::NO_ONE && i.first->getOwner() != where.getOwner() && i.second <= 2)
+        {
+            i.first->setOwner(where.getOwner());
+        }
+    }
+    if(currentPlayerTurn==Owner::PLAYER1)
+        currentPlayerTurn = Owner::PLAYER2;
+    else
+        currentPlayerTurn = Owner::PLAYER1;
+}
+void Board::resetHexesState()
+{
+    for(int i = 0; i<boardState.size();i++)
+    {
+        for(int j = 0; j<boardState[i].size();j++)
+        {
+            boardState[i][j].setState(HexState::NOTHING);
+        }
+    }
+}
+void Board::selectHex(Hex &h)
+{
+    if(selectedHex != nullptr)
+        selectedHex->unselect();
+
+    selectedHex = &h;
+    h.select();
+
+    auto mapa = findCloseHexes(h);;
+    for(auto i : mapa)
+    {
+        if(i.first->getOwner() != Owner::NO_ONE)
+            continue;
+        if(i.second<=4 && i.second >= 2)
+            i.first->setState(HexState::CLOSE);
+        else if(i.second <= 2)
+            i.first->setState(HexState::VERY_CLOSE);
+    }
+}
+
+
+float distance(int x1, int x2, int y1, int y2)
+{
+    int x = abs(x2-x1);
+    int y = abs(y2-y1);
+
+    float c = x*x + y*y;
+    c = sqrt(c);
+
+    return c;
+}
+
+std::map<Hex*,int> Board::findCloseHexes(Hex &h)
+{
+    auto mapa = std::map<Hex*,int>();
+    mapa.clear();
+
+    for (int i = 0; i < boardState.size(); ++i)
+    {
+        for (int j = 0; j < boardState[i].size(); ++j)
+        {
+            float d = distance(h.getWindowPosition().x,boardState[i][j].getWindowPosition().x,h.getWindowPosition().y,boardState[i][j].getWindowPosition().y);
+            d/=radius;
+            boardState[i][j].distance = d;
+            if(d<=4)
+            {
+                mapa[&boardState[i][j]] = (int)d;
+            }
+            else
+            {
+                boardState[i][j].setState(HexState::NOTHING);
+            }
+        }
+    }
+    return mapa;
+}
 
 void Board::drawHex(Hex& h)
 {
-    sf::ConvexShape shape;
+    h.drawHex();
 
-    sf::Color color = sf::Color::Magenta;
-    switch (h.getOwner())
-    {
-        case Owner::NO_ONE:
-            color = sf::Color::Yellow;
-            break;
-        case Owner::PLAYER1:
-            color = sf::Color::Green;
-            break;
-        case Owner::PLAYER2:
-            color = sf::Color::Cyan;
-            break;
-    }
-    shape.setFillColor(color);
-
-    shape.setPosition(h.getWindowPosition().x, h.getWindowPosition().y);
-    shape.setPointCount(6);
-
-    for(int i = 0;i<6;i++)
-    {
-        float angle_deg = 60*i;
-        float angle_rad = 3.1415 / 180 * angle_deg;
-        //float px = h.getPosX() + radius*cos(angle_rad);
-        float px = radius*cos(angle_rad);
-        //float py = h.getPosY() + radius* sin(angle_rad);
-        float py = radius* sin(angle_rad);
-        shape.setPoint(i, sf::Vector2f(px, py));
-    }
-    shape.setOutlineColor(sf::Color::White);
-    shape.setOutlineThickness(3);
-
-    sf::Text text;
+/*    sf::Text text;
 
     // select the font
     text.setFont(font); // font is a sf::Font
 
     // set the string to display
-    std::string t = std::to_string(h.getPosX()) + " " + std::to_string(h.getPosY());
+    //std::string t = std::to_string(h.getPosX()) + " " + std::to_string(h.getPosY());
+    std::string t = std::to_string(h.distance);
+*//*    std::string t = "";
+    switch (h.getState())
+    {
+        case HexState::NOTHING: t = "NTH";break;
+        case HexState::SELECTED: t = "SEL"; break;
+        case HexState::CLOSE: t = "CL"; break;
+        case HexState::VERY_CLOSE: t = "VC"; break;
+
+    }*//*
     text.setString(t);
 
     text.setPosition(h.getWindowPosition().x,h.getWindowPosition().y);
@@ -88,14 +176,13 @@ void Board::drawHex(Hex& h)
     text.setCharacterSize(24); // in pixels, not points!
 
     // set the color
-    text.setFillColor(sf::Color::Red);
+    text.setFillColor(sf::Color::Black);
 
     // set the text style
     text.setStyle(sf::Text::Bold | sf::Text::Underlined);
     // inside the main loop, between window.clear() and window.display()
 
-    window.draw(shape);
-    window.draw(text);
+    window.draw(text);*/
 }
 
 void Board::buildBoard()
@@ -104,16 +191,31 @@ void Board::buildBoard()
     {
         for (int j = 0; j<i+5;j++)
         {
-            boardState[i].push_back(Hex(i,j,radius,Owner::NO_ONE));
+            if((i==4 && j==3) || (i == 3 && j == 4))
+                continue;
+            boardState[i].push_back(Hex(i,j,radius,window,Owner::NO_ONE));
+
         }
     }
     for (int i = 0; i<4;i++)
     {
         for(int j = 0; j<8-i;j++)
         {
-            boardState[i+5].push_back(Hex(i+5,j,radius,Owner::NO_ONE));
+            if(i==0 && j == 4)
+                continue;
+            boardState[i+5].push_back(Hex(i+5,j,radius,window,Owner::NO_ONE));
         }
     }
+
+
+    boardState[0][0].setOwner(Owner::PLAYER1);
+    boardState[0][4].setOwner(Owner::PLAYER2);
+
+    boardState[4][0].setOwner(Owner::PLAYER2);
+    boardState[4][7].setOwner(Owner::PLAYER1);
+
+    boardState[8][0].setOwner(Owner::PLAYER1);
+    boardState[8][4].setOwner(Owner::PLAYER2);
 }
 
 void Board::offsetHexes()

@@ -3,7 +3,7 @@
 #include "Board/Hex.h"
 #include "iostream"
 #include "Owner.h"
-#include "Background.h"
+#include "Background/Background.h"
 int main()
 {
 
@@ -12,7 +12,6 @@ int main()
     Board b = Board(window);
     Background background = Background(window);
 
-
     while (window.isOpen())
     {
         sf::Event event;
@@ -20,12 +19,14 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if(event.type == sf::Event::MouseButtonPressed)
+                b.OnMouseClicked(sf::Vector2<int>(event.mouseButton.x, event.mouseButton.y));
 
-            window.clear();
-            background.drawBackground();
-            b.drawBoard();
-            window.display();
         }
+        window.clear();
+        background.drawBackground();
+        b.drawBoard();
+        window.display();
     }
 
     return 0;
