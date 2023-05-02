@@ -29,19 +29,19 @@ void Hex::calculateCoordinates(const int &radius)
 {
     float xDistance = radius*2;
     float yDistance = radius * sqrt(3) / 2;
-    float offsetX = xDistance/5;;
+    float offsetX = xDistance/((radius*1.0f)/8.0f);;
+    offsetX+=5.0f;
     float offsetY = 0;
     if(positionX>4)
     {
-        offsetY += yDistance*(positionX-4);
+        offsetY += (yDistance+2.5f)*(positionX-4);
     }
     else if(positionX<4)
     {
-        offsetY += yDistance*(4-positionX);
+        offsetY += (yDistance+2.5f)*(4-positionX);
     }
-
     windowXPosition = (positionX+1) * xDistance + offsetX*(9-positionX);
-    windowYPosition = (positionY+1)*2 * yDistance+offsetY;
+    windowYPosition = (positionY+1)*2 * yDistance+offsetY + (5 * positionY);
 }
 
 sf::Vector2<int> Hex::getWindowPosition()
@@ -52,6 +52,8 @@ sf::Vector2<int> Hex::getWindowPosition()
 void Hex::Move(sf::Vector2<int> move)
 {
     shape.move(move.x,move.y);
+    outline.move(move.x,move.y);
+    selectObject.move(move.x,move.y);
     windowXPosition+=move.x;
     windowYPosition+=move.y;
 }
@@ -77,8 +79,8 @@ HexState Hex::setState(HexState newState) {
 }
 void Hex::drawHex()
 {
-    sf::Color color = sf::Color::Magenta;
-    sf::Color outlineColor = sf::Color::Black;
+    sf::Color color = sf::Color(200,0,167);
+    sf::Color outlineColor = sf::Color(140,0,107);
 
     switch (getOwner())
     {
@@ -93,27 +95,30 @@ void Hex::drawHex()
             break;
     }
 
+    shape.setFillColor(color);
 
+    outline.setFillColor(sf::Color(140,0,107));
+
+    window.draw(outline);
+    window.draw(shape);
+}
+void Hex::drawOutline()
+{
+    sf::Color outlineColor = sf::Color(140,0,107);
     switch (getState()) {
         case HexState::SELECTED: outlineColor = sf::Color::Yellow; break;
         case HexState::VERY_CLOSE: outlineColor = sf::Color::Green; break;
         case HexState::CLOSE: outlineColor = sf::Color::Yellow;  break;
+        case HexState::NOTHING: outlineColor = sf::Color::Transparent; break;
     }
 
+    selectObject.setOutlineColor(outlineColor);
 
-    shape.setFillColor(color);
-    outline.setFillColor(outlineColor);
-
-    std::cout<<outline.getPosition().x<<" "<<outline.getPosition().y<< std::endl;
-
-    window.draw(shape);
-    window.draw(outline);
+    window.draw(selectObject);
 }
-
 void Hex::generateShape()
 {
     shape = sf::ConvexShape();
-    //shape.setOrigin(windowXPosition,windowYPosition);
     shape.setPosition(windowXPosition, windowYPosition);
     shape.setPointCount(6);
 
@@ -122,9 +127,9 @@ void Hex::generateShape()
         float angle_deg = 60*i;
         float angle_rad = 3.1415 / 180 * angle_deg;
         //float px = h.getPosX() + radius*cos(angle_rad);
-        float px = radius*cos(angle_rad);
+        float px = (radius-5)*cos(angle_rad);
         //float py = h.getPosY() + radius* sin(angle_rad);
-        float py = radius* sin(angle_rad);
+        float py = (radius-5)*sin(angle_rad);
         shape.setPoint(i, sf::Vector2f(px, py));
     }
     shape.setFillColor(sf::Color::Yellow);
@@ -140,16 +145,31 @@ void Hex::generateShape()
         float angle_deg = 60*i;
         float angle_rad = 3.1415 / 180 * angle_deg;
         //float px = h.getPosX() + radius*cos(angle_rad);
-        float px = radius*(4/5)*cos(angle_rad);
+        float px = (radius+3)*cos(angle_rad);
         //float py = h.getPosY() + radius* sin(angle_rad);
-        float py = radius*(4/5)* sin(angle_rad);
+        float py = (radius+3)* sin(angle_rad);
         outline.setPoint(i, sf::Vector2f(px, py));
     }
     outline.setFillColor(sf::Color::Yellow);
 
-    //shape.setOutlineColor(sf::Color::White);
-    //shape.setOutlineThickness(3);
 
+    selectObject = sf::ConvexShape();
+    selectObject.setPosition(windowXPosition, windowYPosition);
+    selectObject.setPointCount(6);
+
+    for(int i = 0;i<6;i++)
+    {
+        float angle_deg = 60*i;
+        float angle_rad = 3.1415 / 180 * angle_deg;
+        //float px = h.getPosX() + radius*cos(angle_rad);
+        float px = (radius-3)*cos(angle_rad);
+        //float py = h.getPosY() + radius* sin(angle_rad);
+        float py = (radius-3)* sin(angle_rad);
+        selectObject.setPoint(i, sf::Vector2f(px, py));
+    }
+    selectObject.setFillColor(sf::Color::Transparent);
+    selectObject.setOutlineColor(sf::Color::Transparent);
+    selectObject.setOutlineThickness(4);
 }
 
 bool Hex::contains(sf::Vector2<int> pos)
@@ -157,18 +177,11 @@ bool Hex::contains(sf::Vector2<int> pos)
     sf::Vector2<float> l1 = shape.getPoint(2);
     sf::Vector2<float> l2 = shape.getPoint(5);
 
-    l1 = shape.getTransform().transformPoint(l1);
-    l2 = shape.getTransform().transformPoint(l2);
+    l1 = outline.getTransform().transformPoint(l1);
+    l2 = outline.getTransform().transformPoint(l2);
 
     if(pos.x >= l1.x && pos.x <= l2.x && pos.y >= l2.y && pos.y <= l1.y)
         return true;
     else
         return false;
-/*    if(positionX == 0 && positionY == 0)
-    {
-        std::cout<<"pos: " << windowXPosition << " " << windowYPosition<<std::endl;
-        std::cout<<"pos point: " << l1.x << " " << l1.y<<std::endl;
-        std::cout<<"pos poin2t: " << l2.x << " " << l2.y<<std::endl;
-    }
-    return false;*/
 }

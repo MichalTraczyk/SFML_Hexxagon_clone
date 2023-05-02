@@ -134,7 +134,7 @@ std::map<Hex*,int> Board::findCloseHexes(Hex &h)
         {
             float d = distance(h.getWindowPosition().x,boardState[i][j].getWindowPosition().x,h.getWindowPosition().y,boardState[i][j].getWindowPosition().y);
             d/=radius;
-            boardState[i][j].distance = d;
+            //boardState[i][j].distance = d;
             if(d<=4)
             {
                 mapa[&boardState[i][j]] = (int)d;
@@ -151,7 +151,7 @@ std::map<Hex*,int> Board::findCloseHexes(Hex &h)
 void Board::drawHex(Hex& h)
 {
     h.drawHex();
-
+    h.drawOutline();
 /*    sf::Text text;
 
     // select the font

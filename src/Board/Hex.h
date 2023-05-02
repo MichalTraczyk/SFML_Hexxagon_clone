@@ -32,7 +32,8 @@ public:
 
     HexState setState(HexState newState);
 
-    float distance;
+    void drawOutline();
+
 private:
 
     int positionX;
@@ -43,8 +44,11 @@ private:
 
 
     void generateShape();
+
     sf::ConvexShape shape;
     sf::ConvexShape outline;
+    sf::ConvexShape selectObject;
+
     void calculateCoordinates(const int &radius);
     sf::RenderWindow &window;
     Owner owner;
