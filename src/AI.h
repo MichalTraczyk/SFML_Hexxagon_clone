@@ -11,7 +11,7 @@
 
 class AI {
 public:
-    static Move findBestMove(Board &board);
+    static void makeBestMove(Board &board);
 private:
     static int calculateMoveValue(Move &m, Board &board);
 };

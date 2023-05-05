@@ -44,6 +44,7 @@ void Board::OnMouseClicked(sf::Vector2<int> position)
 {
     if(againstAI && currentPlayerTurn==Owner::PLAYER2)
         return;
+
     for(int i = 0; i<boardState.size();i++)
     {
         for(int j = 0; j<boardState[i].size();j++)
@@ -72,7 +73,9 @@ void Board::move(Move &m)
     std::cout<<&m.from<<std::endl;
     std::cout<<"AFTER CHECK " <<std::endl;
     Hex* h = &m.from;
-    std::cout<<h->getPosY() <<" " << h->getPosX()<<std::endl;
+    Hex* h1 = &m.where;
+    std::cout<<h->getPosX() <<" " << h->getPosY()<<std::endl;
+    std::cout<<h1->getPosX() <<" " << h1->getPosY()<<std::endl;
     std::cout<<"AFTER CHECK 1" <<std::endl;
 
     m.where.setOwner(m.from.getOwner());
@@ -91,15 +94,20 @@ void Board::move(Move &m)
     }
 
     if(currentPlayerTurn==Owner::PLAYER1)
+    {
+        if(againstAI)
+            clock.restart();
         currentPlayerTurn = Owner::PLAYER2;
+    }
     else
         currentPlayerTurn = Owner::PLAYER1;
 
 }
 void Board::AIMove()
 {
-    Move m = Move(AI::findBestMove(*this));
-    move(m);
+    AI::makeBestMove(*this);
+/*    Move m = AI::makeBestMove(*this);
+    move(m);*/
     currentPlayerTurn = Owner::PLAYER1;
 }
 
@@ -199,7 +207,7 @@ void Board::drawHex(Hex& h)
 
     // set the string to display
     //std::string t = std::to_string(h.getPosX()) + " " + std::to_string(h.getPosY());
-    std::string t = std::to_string(h.distance);
+    std::string t =std::to_string(aiMoveTimer);
 *//*    std::string t = "";
     switch (h.getState())
     {
@@ -287,7 +295,7 @@ void Board::Update()
     if(againstAI && currentPlayerTurn == Owner::PLAYER2)
     {
         aiMoveTimer += clock.restart().asSeconds();
-        if(aiMoveTimer>2)
+        if(aiMoveTimer>1)
         {
             AIMove();
             aiMoveTimer = 0;

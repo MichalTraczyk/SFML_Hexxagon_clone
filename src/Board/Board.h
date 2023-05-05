@@ -21,6 +21,7 @@ public:
     std::map<Hex *, int> findCloseHexes(Hex &h);
     void Update();
 
+    void move(Move &move);
 private:
     bool againstAI;
     Owner currentPlayerTurn = Owner::PLAYER1;
@@ -28,6 +29,7 @@ private:
     void buildBoard();
     void drawHex(Hex& h);
     void offsetHexes();
+
     std::vector<std::vector<Hex>> boardState={
             {},
             {},
@@ -39,15 +41,13 @@ private:
             {},
             {}
     };
-
     const int radius = 50;
+
     Hex* selectedHex= nullptr;
-
     sf::RenderWindow &window;
-    void selectHex(Hex &h);
 
+    void selectHex(Hex &h);
     void resetHexesState();
-    void move(Move &move);
 
     //void move(Move m);
     void AIMove();
