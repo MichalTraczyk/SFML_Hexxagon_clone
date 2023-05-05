@@ -97,6 +97,22 @@ build CMakeFiles/Hexxagon.dir/src/OptionsAndMenu/Button.cpp.obj: CXX_COMPILER__H
   OBJECT_DIR = CMakeFiles\Hexxagon.dir
   OBJECT_FILE_DIR = CMakeFiles\Hexxagon.dir\src\OptionsAndMenu
 
+build CMakeFiles/Hexxagon.dir/src/Move.cpp.obj: CXX_COMPILER__Hexxagon_Debug C$:/Projektycpp/Hexxagon/src/Move.cpp || cmake_object_order_depends_target_Hexxagon
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\Hexxagon.dir\src\Move.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++1z
+  INCLUDES = -isystem C:/SFML/include
+  OBJECT_DIR = CMakeFiles\Hexxagon.dir
+  OBJECT_FILE_DIR = CMakeFiles\Hexxagon.dir\src
+
+build CMakeFiles/Hexxagon.dir/src/AI.cpp.obj: CXX_COMPILER__Hexxagon_Debug C$:/Projektycpp/Hexxagon/src/AI.cpp || cmake_object_order_depends_target_Hexxagon
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\Hexxagon.dir\src\AI.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++1z
+  INCLUDES = -isystem C:/SFML/include
+  OBJECT_DIR = CMakeFiles\Hexxagon.dir
+  OBJECT_FILE_DIR = CMakeFiles\Hexxagon.dir\src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Hexxagon
@@ -105,7 +121,7 @@ build CMakeFiles/Hexxagon.dir/src/OptionsAndMenu/Button.cpp.obj: CXX_COMPILER__H
 #############################################
 # Link the executable Hexxagon.exe
 
-build Hexxagon.exe: CXX_EXECUTABLE_LINKER__Hexxagon_Debug CMakeFiles/Hexxagon.dir/src/main.cpp.obj CMakeFiles/Hexxagon.dir/src/Board/Board.cpp.obj CMakeFiles/Hexxagon.dir/src/Board/Hex.cpp.obj CMakeFiles/Hexxagon.dir/src/Background/Background.cpp.obj CMakeFiles/Hexxagon.dir/src/Background/Star.cpp.obj CMakeFiles/Hexxagon.dir/src/OptionsAndMenu/Button.cpp.obj | C$:/SFML/lib/libsfml-system-s-d.a C$:/SFML/lib/libsfml-window-s-d.a C$:/SFML/lib/libsfml-graphics-s-d.a C$:/SFML/lib/libsfml-audio-s-d.a C$:/SFML/lib/libsfml-window-s-d.a C$:/SFML/lib/libfreetype.a C$:/SFML/lib/libsfml-system-s-d.a C$:/SFML/lib/libopenal32.a C$:/SFML/lib/libvorbisfile.a C$:/SFML/lib/libvorbisenc.a C$:/SFML/lib/libvorbis.a C$:/SFML/lib/libogg.a C$:/SFML/lib/libFLAC.a
+build Hexxagon.exe: CXX_EXECUTABLE_LINKER__Hexxagon_Debug CMakeFiles/Hexxagon.dir/src/main.cpp.obj CMakeFiles/Hexxagon.dir/src/Board/Board.cpp.obj CMakeFiles/Hexxagon.dir/src/Board/Hex.cpp.obj CMakeFiles/Hexxagon.dir/src/Background/Background.cpp.obj CMakeFiles/Hexxagon.dir/src/Background/Star.cpp.obj CMakeFiles/Hexxagon.dir/src/OptionsAndMenu/Button.cpp.obj CMakeFiles/Hexxagon.dir/src/Move.cpp.obj CMakeFiles/Hexxagon.dir/src/AI.cpp.obj | C$:/SFML/lib/libsfml-system-s-d.a C$:/SFML/lib/libsfml-window-s-d.a C$:/SFML/lib/libsfml-graphics-s-d.a C$:/SFML/lib/libsfml-audio-s-d.a C$:/SFML/lib/libsfml-window-s-d.a C$:/SFML/lib/libfreetype.a C$:/SFML/lib/libsfml-system-s-d.a C$:/SFML/lib/libopenal32.a C$:/SFML/lib/libvorbisfile.a C$:/SFML/lib/libvorbisenc.a C$:/SFML/lib/libvorbis.a C$:/SFML/lib/libogg.a C$:/SFML/lib/libFLAC.a
   FLAGS = -g
   LINK_LIBRARIES = C:/SFML/lib/libsfml-system-s-d.a  C:/SFML/lib/libsfml-window-s-d.a  C:/SFML/lib/libsfml-graphics-s-d.a  C:/SFML/lib/libsfml-audio-s-d.a  C:/SFML/lib/libsfml-window-s-d.a  -lgdi32  -lOpenGL32  C:/SFML/lib/libfreetype.a  C:/SFML/lib/libsfml-system-s-d.a  -lwinmm  C:/SFML/lib/libopenal32.a  C:/SFML/lib/libvorbisfile.a  C:/SFML/lib/libvorbisenc.a  C:/SFML/lib/libvorbis.a  C:/SFML/lib/libogg.a  C:/SFML/lib/libFLAC.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Hexxagon.dir

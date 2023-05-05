@@ -4,12 +4,13 @@
 #include "iostream"
 #include "Owner.h"
 #include "Background/Background.h"
+#include "AI.h"
 int main()
 {
 
     sf::RenderWindow window(sf::VideoMode(1600, 900), "SFML works!");
 
-    Board b = Board(window);
+    Board b = Board(window,true);
     Background background = Background(window);
 
     while (window.isOpen())
@@ -26,6 +27,8 @@ int main()
         window.clear();
         background.drawBackground();
         b.drawBoard();
+
+        b.Update();
         window.display();
     }
 

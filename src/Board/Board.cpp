@@ -8,8 +8,10 @@
 #include "cmath"
 #include "Hex.h"
 #include "vector"
+#include "../AI.h"
+#include <thread>
 
-Board::Board(sf::RenderWindow &w) : window(w)
+Board::Board(sf::RenderWindow &w, bool againstAI) : window(w), againstAI(againstAI)
 {
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
@@ -40,6 +42,8 @@ void Board::drawBoard() {
 }
 void Board::OnMouseClicked(sf::Vector2<int> position)
 {
+    if(againstAI && currentPlayerTurn==Owner::PLAYER2)
+        return;
     for(int i = 0; i<boardState.size();i++)
     {
         for(int j = 0; j<boardState[i].size();j++)
@@ -50,37 +54,55 @@ void Board::OnMouseClicked(sf::Vector2<int> position)
                     selectHex(boardState[i][j]);
                 else if(boardState[i][j].getState() == HexState::CLOSE)
                 {
-                    move(*selectedHex, boardState[i][j], false);
+                    Move m = Move(*selectedHex, boardState[i][j], false);
+                    move(m);
                 }
                 else if(boardState[i][j].getState() == HexState::VERY_CLOSE)
                 {
-                    move(*selectedHex, boardState[i][j], true);
+                    Move m = Move(*selectedHex, boardState[i][j], true);
+                    move(m);
                 }
             }
         }
     }
 }
-void Board::move(Hex &from, Hex &where, bool duplicate)
+void Board::move(Move &m)
 {
-    where.setOwner(from.getOwner());
+    std::cout<<"CHECK : " <<std::endl;
+    std::cout<<&m.from<<std::endl;
+    std::cout<<"AFTER CHECK " <<std::endl;
+    Hex* h = &m.from;
+    std::cout<<h->getPosY() <<" " << h->getPosX()<<std::endl;
+    std::cout<<"AFTER CHECK 1" <<std::endl;
 
-    if(!duplicate)
+    m.where.setOwner(m.from.getOwner());
+
+    if(!m.duplicate)
     {
-        from.setOwner(Owner::NO_ONE);
+        m.from.setOwner(Owner::NO_ONE);
     }
     resetHexesState();
-    for(auto i : findCloseHexes(where))
+    for(auto i : findCloseHexes(m.where))
     {
-        if(i.first->getOwner() != Owner::NO_ONE && i.first->getOwner() != where.getOwner() && i.second <= 2)
+        if(i.first->getOwner() != Owner::NO_ONE && i.first->getOwner() != m.where.getOwner() && i.second <= 2)
         {
-            i.first->setOwner(where.getOwner());
+            i.first->setOwner(m.where.getOwner());
         }
     }
+
     if(currentPlayerTurn==Owner::PLAYER1)
         currentPlayerTurn = Owner::PLAYER2;
     else
         currentPlayerTurn = Owner::PLAYER1;
+
 }
+void Board::AIMove()
+{
+    Move m = Move(AI::findBestMove(*this));
+    move(m);
+    currentPlayerTurn = Owner::PLAYER1;
+}
+
 void Board::resetHexesState()
 {
     for(int i = 0; i<boardState.size();i++)
@@ -99,15 +121,10 @@ void Board::selectHex(Hex &h)
     selectedHex = &h;
     h.select();
 
-    auto mapa = findCloseHexes(h);;
+    auto mapa = findPossibleMoves(h);;
     for(auto i : mapa)
     {
-        if(i.first->getOwner() != Owner::NO_ONE)
-            continue;
-        if(i.second<=4 && i.second >= 2)
-            i.first->setState(HexState::CLOSE);
-        else if(i.second <= 2)
-            i.first->setState(HexState::VERY_CLOSE);
+        i.first->setState(i.second);
     }
 }
 
@@ -122,7 +139,6 @@ float distance(int x1, int x2, int y1, int y2)
 
     return c;
 }
-
 std::map<Hex*,int> Board::findCloseHexes(Hex &h)
 {
     auto mapa = std::map<Hex*,int>();
@@ -132,9 +148,10 @@ std::map<Hex*,int> Board::findCloseHexes(Hex &h)
     {
         for (int j = 0; j < boardState[i].size(); ++j)
         {
+            if(&boardState[i][j] == &h)
+                continue;
             float d = distance(h.getWindowPosition().x,boardState[i][j].getWindowPosition().x,h.getWindowPosition().y,boardState[i][j].getWindowPosition().y);
             d/=radius;
-            //boardState[i][j].distance = d;
             if(d<=4)
             {
                 mapa[&boardState[i][j]] = (int)d;
@@ -147,6 +164,29 @@ std::map<Hex*,int> Board::findCloseHexes(Hex &h)
     }
     return mapa;
 }
+
+
+std::map<Hex*,HexState> Board::findPossibleMoves(Hex &h)
+{
+    auto mapa = std::map<Hex*,HexState>();
+    mapa.clear();
+
+    for (auto i : findCloseHexes(h))
+    {
+        if(i.first->getOwner() != Owner::NO_ONE)
+            continue;
+        if(i.second > 2 && i.second <= 4)
+        {
+            mapa[i.first] = HexState::CLOSE;
+        }
+        else if(i.second <= 2)
+        {
+            mapa[i.first] = HexState::VERY_CLOSE;
+        }
+    }
+    return mapa;
+}
+
 
 void Board::drawHex(Hex& h)
 {
@@ -233,6 +273,24 @@ void Board::offsetHexes()
         for (int j = 0;j<boardState[i].size();j++)
         {
             boardState[i][j].Move(sf::Vector2<int>(moveDistance,0));
+        }
+    }
+}
+
+std::vector<std::vector<Hex>> * Board::getBoardState()
+{
+    return &boardState;
+}
+
+void Board::Update()
+{
+    if(againstAI && currentPlayerTurn == Owner::PLAYER2)
+    {
+        aiMoveTimer += clock.restart().asSeconds();
+        if(aiMoveTimer>2)
+        {
+            AIMove();
+            aiMoveTimer = 0;
         }
     }
 }

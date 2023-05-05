@@ -21,17 +21,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b50f2bb-e389-413e-bea3-6bb87ea11cd4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/AI.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/AI.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Move.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Move.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-b930c9735c78916388fd.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-05-01T22-31-11-0409.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-8dc565ff37559a19ba84.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-05-01T23-19-23-0526.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-Hexxagon-Debug-480e3424448abf47f3f5.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board/Board.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Board.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board/Hex.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Hex.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board/Hex.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Hex.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board/Board.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Board.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,12 +91,12 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="Hexxagon" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Hexxagon" TARGET_NAME="Hexxagon" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Hexxagon" RUN_TARGET_NAME="Hexxagon">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Hexxagon" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Hexxagon" TARGET_NAME="Hexxagon" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Hexxagon" RUN_TARGET_NAME="Hexxagon">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -117,6 +122,10 @@
       <workItem from="1682951490827" duration="20198000" />
       <workItem from="1682977477366" duration="4684000" />
       <workItem from="1682983162219" duration="2968000" />
+      <workItem from="1683052741360" duration="2695000" />
+      <workItem from="1683055647672" duration="7041000" />
+      <workItem from="1683064934467" duration="2827000" />
+      <workItem from="1683298372544" duration="4933000" />
     </task>
     <servers />
   </component>
