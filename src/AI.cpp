@@ -18,9 +18,8 @@ int AI::calculateMoveValue(Move &m, Board &board)
     }
     return val;
 }
-void AI::makeBestMove(Board &board) {
-
-
+void AI::makeBestMove(Board &board)
+{
     std::vector<std::vector<Hex>> boardState = *board.getBoardState();
     int maxVal = 0;
     Move* bestMove = nullptr;
@@ -46,10 +45,5 @@ void AI::makeBestMove(Board &board) {
             }
         }
     }
-/*    std::cout<<"============: "<<std::endl;
-    std::cout<<"from: " << from->getPosX() << " " << from->getPosY() << std::endl;
-    std::cout<<"to: " << where->getPosX() << " " << where->getPosY() << std::endl;
-    std::cout<<"addres from: "<<from<< std::endl;
-    std::cout<<"addres where : "<<where<< std::endl;*/
     board.move(*bestMove);
 }

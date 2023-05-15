@@ -26,8 +26,6 @@ int main()
         }
         window.clear();
         background.drawBackground();
-        b.drawBoard();
-
         b.Update();
         window.display();
     }

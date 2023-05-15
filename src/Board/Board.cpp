@@ -16,7 +16,7 @@ Board::Board(sf::RenderWindow &w, bool againstAI) : window(w), againstAI(against
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
-    if (!font.loadFromFile("arial.ttf"))
+    if (!font.loadFromFile("Anton.ttf"))
     {
         std::cout<<"ERROR LOADING THE FONT";
     }
@@ -28,8 +28,70 @@ Board::Board(sf::RenderWindow &w, bool againstAI) : window(w), againstAI(against
 
     //Draws every hex according to its state and position
     drawBoard();
+
+    //draw scores
+    buildScoreboard();
+
+}
+void Board::Update()
+{
+    if(againstAI && currentPlayerTurn == Owner::PLAYER2)
+    {
+        aiMoveTimer += clock.restart().asSeconds();
+        if(aiMoveTimer>1)
+        {
+            AIMove();
+            aiMoveTimer = 0;
+        }
+    }
+
+    drawBoard();
+    drawScoreboard();
 }
 
+void Board::buildScoreboard()
+{
+    //creating rects
+    player1PointsRect = sf::RectangleShape(sf::Vector2f(0,scoreboardRectHeight));
+    player2PointsRect = sf::RectangleShape(sf::Vector2f(0,scoreboardRectHeight));
+
+    //colors
+    player1PointsRect.setFillColor(sf::Color::Green);
+    player2PointsRect.setFillColor(sf::Color::Cyan);
+
+    //setting up positions
+    player1PointsRect.setPosition(window.getSize().x - scoreBoardRightDistance,window.getSize().y - scoreBoardDownDistance);
+    player2PointsRect.setPosition(window.getSize().x - scoreBoardRightDistance,(window.getSize().y - scoreBoardDownDistance) - scoreboardRectHeight*2);
+
+
+    //setting up text
+    player1PointsText.setFont(font); // font is a sf::Font
+    player1PointsText.setPosition(player1PointsRect.getPosition().x,player1PointsRect.getPosition().y);
+    player1PointsText.setCharacterSize(scoreboardRectHeight-3);
+    player1PointsText.setFillColor(sf::Color::White);
+
+    player2PointsText.setFont(font); // font is a sf::Font
+    player2PointsText.setPosition(player2PointsRect.getPosition().x,player2PointsRect.getPosition().y);
+    player2PointsText.setCharacterSize(scoreboardRectHeight-3);
+    player2PointsText.setFillColor(sf::Color::White);
+}
+void Board::calculateScoreboard()
+{
+    recalculatePoints();
+    player1PointsRect.setSize(sf::Vector2f(player1Score*scoreboardRectWidthMultiplier,player1PointsRect.getSize().y));
+    player2PointsRect.setSize(sf::Vector2f(player2Score*scoreboardRectWidthMultiplier,player2PointsRect.getSize().y));
+
+    player1PointsText.setString(std::to_string(player1Score));
+    player2PointsText.setString(std::to_string(player2Score));
+}
+void Board::drawScoreboard()
+{
+    window.draw(player1PointsRect);
+    window.draw(player2PointsRect);
+
+    window.draw(player1PointsText);
+    window.draw(player2PointsText);
+}
 void Board::drawBoard() {
 
     for(int i = 0; i<boardState.size(); i++)
@@ -69,14 +131,13 @@ void Board::OnMouseClicked(sf::Vector2<int> position)
 }
 void Board::move(Move &m)
 {
-    std::cout<<"CHECK : " <<std::endl;
+/*    std::cout<<"CHECK : " <<std::endl;
     std::cout<<&m.from<<std::endl;
-    std::cout<<"AFTER CHECK " <<std::endl;
     Hex* h = &m.from;
     Hex* h1 = &m.where;
     std::cout<<h->getPosX() <<" " << h->getPosY()<<std::endl;
     std::cout<<h1->getPosX() <<" " << h1->getPosY()<<std::endl;
-    std::cout<<"AFTER CHECK 1" <<std::endl;
+    std::cout<<"AFTER CHECK 1" <<std::endl;*/
 
     m.where.setOwner(m.from.getOwner());
 
@@ -84,7 +145,10 @@ void Board::move(Move &m)
     {
         m.from.setOwner(Owner::NO_ONE);
     }
-    resetHexesState();
+
+    //unselect everything
+    unselectAllHexes();
+
     for(auto i : findCloseHexes(m.where))
     {
         if(i.first->getOwner() != Owner::NO_ONE && i.first->getOwner() != m.where.getOwner() && i.second <= 2)
@@ -92,6 +156,8 @@ void Board::move(Move &m)
             i.first->setOwner(m.where.getOwner());
         }
     }
+
+    calculateScoreboard();
 
     if(currentPlayerTurn==Owner::PLAYER1)
     {
@@ -103,6 +169,22 @@ void Board::move(Move &m)
         currentPlayerTurn = Owner::PLAYER1;
 
 }
+void Board::recalculatePoints()
+{
+    player1Score=0;
+    player2Score=0;
+    for(int i = 0; i<boardState.size();i++)
+    {
+        for(int j = 0; j<boardState[i].size();j++)
+        {
+            if(boardState[i][j].getOwner() == Owner::PLAYER1)
+                player1Score++;
+
+            if(boardState[i][j].getOwner() == Owner::PLAYER2)
+                player2Score++;
+        }
+    }
+}
 void Board::AIMove()
 {
     AI::makeBestMove(*this);
@@ -111,7 +193,7 @@ void Board::AIMove()
     currentPlayerTurn = Owner::PLAYER1;
 }
 
-void Board::resetHexesState()
+void Board::unselectAllHexes()
 {
     for(int i = 0; i<boardState.size();i++)
     {
@@ -289,17 +371,3 @@ std::vector<std::vector<Hex>> * Board::getBoardState()
 {
     return &boardState;
 }
-
-void Board::Update()
-{
-    if(againstAI && currentPlayerTurn == Owner::PLAYER2)
-    {
-        aiMoveTimer += clock.restart().asSeconds();
-        if(aiMoveTimer>1)
-        {
-            AIMove();
-            aiMoveTimer = 0;
-        }
-    }
-}
-

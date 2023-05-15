@@ -20,16 +20,43 @@ public:
     std::map<Hex *, HexState> findPossibleMoves(Hex &h);
     std::map<Hex *, int> findCloseHexes(Hex &h);
     void Update();
-
     void move(Move &move);
-private:
-    bool againstAI;
-    Owner currentPlayerTurn = Owner::PLAYER1;
-    sf::Font font;
-    void buildBoard();
-    void drawHex(Hex& h);
-    void offsetHexes();
 
+private:
+
+    sf::RenderWindow &window;
+    sf::Clock clock;
+
+    //Scoreboard
+    int player1Score = 0;
+    int player2Score = 0;
+
+    const int scoreBoardDownDistance = 100;
+    const int scoreBoardRightDistance = 500;
+
+    const int scoreboardRectHeight = 35;
+    const int scoreboardRectWidthMultiplier = 10;
+
+    sf::RectangleShape player1PointsRect;
+    sf::RectangleShape player2PointsRect;
+
+    sf::Text player1PointsText;
+    sf::Text player2PointsText;
+
+    void buildScoreboard();
+    void drawScoreboard();
+    void recalculatePoints();
+    void calculateScoreboard();
+
+    //Ai
+    bool againstAI;
+    void AIMove();
+    float aiMoveTimer;
+
+
+    //Game logic
+    Owner currentPlayerTurn = Owner::PLAYER1;
+    void buildBoard();
     std::vector<std::vector<Hex>> boardState={
             {},
             {},
@@ -41,17 +68,19 @@ private:
             {},
             {}
     };
-    const int radius = 50;
-
     Hex* selectedHex= nullptr;
-    sf::RenderWindow &window;
 
+
+    //visuals
+    sf::Font font;
+    void drawHex(Hex& h);
+    const int radius = 50;
+    void offsetHexes();
+
+
+    //Movement
     void selectHex(Hex &h);
-    void resetHexesState();
+    void unselectAllHexes();
 
-    //void move(Move m);
-    void AIMove();
-    sf::Clock clock;
-    float aiMoveTimer;
 };
 #endif //HEXXAGON_BOARD_H
