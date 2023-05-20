@@ -6,7 +6,7 @@
 #define HEXXAGON_MOVE_H
 
 
-#include "Board/Hex.h"
+#include "Board/Hex/Hex.h"
 
 class Move
 {

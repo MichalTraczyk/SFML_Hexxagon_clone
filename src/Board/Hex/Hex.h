@@ -6,8 +6,8 @@
 #define HEXXAGON_HEX_H
 
 #include <SFML/Graphics.hpp>
-#include "../Owner.h"
-#include "../HexState.h"
+#include "../../Owner.h"
+#include "HexState.h"
 class Hex
 {
 public:

@@ -5,7 +5,7 @@
 #include "Hex.h"
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "../Owner.h"
+#include "../../Owner.h"
 #include "cmath"
 
 Hex::Hex(int posX, int posY, const int &radius,sf::RenderWindow &w,Owner owner):positionX(posX),window(w),positionY(posY),radius(radius), owner(owner)
