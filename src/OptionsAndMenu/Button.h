@@ -11,9 +11,9 @@
 class Button
 {
 public:
-    Button(const std::string &text, void* onClick, const sf::Vector2<float> &position, const sf::Vector2<float> &size);
-    Button(void* onClick, const sf::Vector2<float> &position, const sf::Vector2<float> &size);
-    Button(std::function<void ()> fn);
+
+    Button(const std::string &text, std::function<void()> onClick, const sf::Vector2<float> &position,
+           const sf::Vector2<float> &size);
 
     void click();
     bool contains(sf::Vector2<float> pos);

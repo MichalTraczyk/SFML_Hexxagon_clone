@@ -6,7 +6,7 @@
 #include "Button.h"
 
 
-Button::Button(const std::string &text, void* onClick,const sf::Vector2<float> &position,const sf::Vector2<float> &size) : onClick(onClick)
+Button::Button(const std::string &text, std::function<void()> onClick,const sf::Vector2<float> &position,const sf::Vector2<float> &size) : onClick(onClick)
 {
     if (!font.loadFromFile("Anton.ttf"))
     {
@@ -26,20 +26,5 @@ void Button::click()
 }
 bool Button::contains(const sf::Vector2<float> pos) {
     return shape.getLocalBounds().contains(pos);
-}
-
-Button::Button(void* onClick, const sf::Vector2<float> &position, const sf::Vector2<float> &size) : onClick(onClick)
-{
-    if (!font.loadFromFile("Anton.ttf"))
-    {
-        std::cout<<"ERROR LOADING THE FONT";
-    }
-    shape = sf::RectangleShape();
-    shape.setSize(size);
-    shape.setPosition(position);
-}
-
-Button::Button(std::function<void()> fn) {
-
 }
 

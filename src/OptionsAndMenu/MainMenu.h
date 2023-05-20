@@ -12,13 +12,13 @@ class MainMenu
 {
 public:
     MainMenu(sf::RenderWindow &window);
+    void Play();
+    void Options();
+    void Exit();
 private:
     sf::Vector2<float> buttonSize = sf::Vector2<float>(100.0f,50.0f);
     std::vector<Button> buttons = {};
     sf::RenderWindow &window;
-    void Play();
-    void Options();
-    void Exit();
 };
 
 
