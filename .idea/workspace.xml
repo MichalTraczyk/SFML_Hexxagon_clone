@@ -21,26 +21,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b50f2bb-e389-413e-bea3-6bb87ea11cd4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Board/Scoreboard.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Board/Scoreboard.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenu.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenu.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-dab26a7c077a56cc3469.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-f8b4beaaa29e31c62c52.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-05-02T22-04-38-0349.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-Hexxagon-Debug-53ce0d1e398fad3f9212.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-b930c9735c78916388fd.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-7f07f4797576594d0647.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-05-20T14-25-26-0251.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-Hexxagon-Debug-30c363adcc07af143ebb.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board/Board.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Board.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board/Board.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Board.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board/Hex.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Hex/Hex.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board/Hex.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Hex/Hex.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HexState.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Hex/HexState.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Move.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Move.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/Button.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/Button.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/Button.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/Button.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,8 +84,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Projektycpp\Hexxagon\src\Board\Hex" />
       <recent name="C:\Projektycpp\Hexxagon\src\OptionsAndMenu" />
+      <recent name="C:\Projektycpp\Hexxagon\src\Board\Hex" />
       <recent name="C:\Projektycpp\Hexxagon\src\Background" />
       <recent name="C:\Projektycpp\Hexxagon\cmake-build-debug" />
       <recent name="C:\Projektycpp\Hexxagon\src" />
@@ -134,7 +129,7 @@
       <workItem from="1683298372544" duration="12846000" />
       <workItem from="1683407575742" duration="154000" />
       <workItem from="1684179377232" duration="4250000" />
-      <workItem from="1684591284692" duration="1673000" />
+      <workItem from="1684591284692" duration="6791000" />
     </task>
     <servers />
   </component>

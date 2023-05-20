@@ -27,6 +27,7 @@ private:
     sf::RenderWindow &window;
     sf::Clock clock;
     float deltaTime;
+
     //Scoreboard
     Scoreboard* scoreboard;
 

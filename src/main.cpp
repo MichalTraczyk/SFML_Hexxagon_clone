@@ -5,6 +5,12 @@
 #include "Owner.h"
 #include "Background/Background.h"
 #include "AI.h"
+#include "OptionsAndMenu/Button.h"
+
+void MyFunction()
+{
+    std::cout<<"UWU OWO";
+}
 int main()
 {
 
@@ -12,6 +18,9 @@ int main()
 
     Board b = Board(window,true);
     Background background = Background(window);
+
+    Button bt = Button(MyFunction);
+
 
     while (window.isOpen())
     {
