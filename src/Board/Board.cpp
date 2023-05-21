@@ -34,9 +34,8 @@ Board::Board(sf::RenderWindow &w, bool againstAI) : window(w), againstAI(against
     scoreboard = new Scoreboard(w,boardState);
 
 }
-void Board::Update()
+void Board::Update(float deltaTime)
 {
-    deltaTime = clock.restart().asSeconds();
     if(againstAI && currentPlayerTurn == Owner::PLAYER2)
     {
         aiMoveTimer += deltaTime;
@@ -222,37 +221,6 @@ void Board::drawHex(Hex& h)
 {
     h.drawHex();
     h.drawOutline();
-/*    sf::Text text;
-
-    // select the font
-    text.setFont(font); // font is a sf::Font
-
-    // set the string to display
-    //std::string t = std::to_string(h.getPosX()) + " " + std::to_string(h.getPosY());
-    std::string t =std::to_string(aiMoveTimer);
-*//*    std::string t = "";
-    switch (h.getState())
-    {
-        case HexState::NOTHING: t = "NTH";break;
-        case HexState::SELECTED: t = "SEL"; break;
-        case HexState::CLOSE: t = "CL"; break;
-        case HexState::VERY_CLOSE: t = "VC"; break;
-
-    }*//*
-    text.setString(t);
-
-    text.setPosition(h.getWindowPosition().x,h.getWindowPosition().y);
-    // set the character size
-    text.setCharacterSize(24); // in pixels, not points!
-
-    // set the color
-    text.setFillColor(sf::Color::Black);
-
-    // set the text style
-    text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-    // inside the main loop, between window.clear() and window.display()
-
-    window.draw(text);*/
 }
 
 void Board::buildBoard()

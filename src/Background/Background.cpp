@@ -17,9 +17,9 @@ Background::Background(sf::RenderWindow &window) : window(window)
     }
 }
 
-void Background::drawBackground()
+void Background::drawBackground(float deltaTime)
 {
-    moveStars();
+    moveStars(deltaTime);
     for(int i = 0; i<stars.size() ; i++)
     {
         sf::CircleShape *s = stars[i].getShape();
@@ -36,10 +36,9 @@ void Background::drawBackground()
 }
 
 
-void Background::moveStars() {
-    sf::Time elapsedTime = clock.restart();
+void Background::moveStars(float deltaTime) {
     for (int i = 0; i < stars.size(); ++i) {
-        stars[i].move(elapsedTime.asSeconds());
+        stars[i].move(deltaTime);
     }
 }
 

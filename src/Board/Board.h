@@ -20,13 +20,11 @@ public:
     std::vector<std::vector<Hex>> * getBoardState();
     std::map<Hex *, HexState> findPossibleMoves(Hex &h);
     std::map<Hex *, int> findCloseHexes(Hex &h);
-    void Update();
+    void Update(float deltaTime);
     void move(Move &move);
 
 private:
     sf::RenderWindow &window;
-    sf::Clock clock;
-    float deltaTime;
 
     //Scoreboard
     Scoreboard* scoreboard;

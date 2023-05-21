@@ -6,22 +6,17 @@
 #include "Background/Background.h"
 #include "AI.h"
 #include "OptionsAndMenu/Button.h"
+#include "OptionsAndMenu/MainMenu.h"
 
-void MyFunction()
-{
-    std::cout<<"UWU OWO";
-}
 int main()
 {
 
     sf::RenderWindow window(sf::VideoMode(1600, 900), "SFML works!");
 
-    Board b = Board(window,true);
-    Background background = Background(window);
+    //Board b = Board(window,true);
+    //Background background = Background(window);
 
-    Button bt = Button(MyFunction);
-
-
+    GameManager manager = GameManager(window);
     while (window.isOpen())
     {
         sf::Event event;
@@ -30,12 +25,13 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
             if(event.type == sf::Event::MouseButtonPressed)
-                b.OnMouseClicked(sf::Vector2<int>(event.mouseButton.x, event.mouseButton.y));
+                manager.onMouseButtonClicked(sf::Vector2<int>(event.mouseButton.x, event.mouseButton.y));
 
         }
         window.clear();
-        background.drawBackground();
-        b.Update();
+
+        manager.Update();
+
         window.display();
     }
 

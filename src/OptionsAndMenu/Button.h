@@ -18,6 +18,9 @@ public:
     void click();
     bool contains(sf::Vector2<float> pos);
 
+//on click
+void draw(sf::RenderWindow &window);
+
 private:
     //Button visuals
     std::function<void ()> onClick;
@@ -28,7 +31,6 @@ private:
 
     sf::Font font;
 
-    //on click
 };
 
 

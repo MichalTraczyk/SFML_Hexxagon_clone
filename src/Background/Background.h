@@ -10,8 +10,8 @@
 class Background{
 public:
     Background(sf::RenderWindow &window);
-    void drawBackground();
-    void moveStars();
+    void drawBackground(float deltaTime);
+    void moveStars(float deltaTime);
 private:
     sf::Clock clock;
 
