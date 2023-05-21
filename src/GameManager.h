@@ -7,28 +7,31 @@
 
 
 #include "Board/Board.h"
+class MainMenu;
 #include "OptionsAndMenu/MainMenu.h"
 #include "Background/Background.h"
 #include "GameState.h"
+
 
 class GameManager {
 public:
     GameManager(sf::RenderWindow &window);
     void Update();
+    void onMouseButtonClicked(sf::Vector2<float> position);
+    void startGame();
 
-    void onMouseButtonClicked(sf::Vector2<int> position);
-
+    int a = 5;
 private:
     sf::Clock clock;
     float deltaTime;
+
     sf::RenderWindow &window;
 
     GameState currentGameState = GameState::MENU;
-    Background* background;
-    Board* board;
     MainMenu* mainMenu;
+    Background* background;
 
-    void StartGame();
+    Board* board;
 
 };
 

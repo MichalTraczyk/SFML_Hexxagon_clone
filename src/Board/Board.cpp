@@ -55,11 +55,11 @@ void Board::drawBoard() {
     {
         for(int j = 0; j<boardState[i].size();j++)
         {
-            drawHex(boardState[i][j]);
+            drawHex(*boardState[i][j]);
         }
     }
 }
-void Board::OnMouseClicked(sf::Vector2<int> position)
+void Board::OnMouseClicked(sf::Vector2<float> position)
 {
     if(againstAI && currentPlayerTurn==Owner::PLAYER2)
         return;
@@ -68,18 +68,19 @@ void Board::OnMouseClicked(sf::Vector2<int> position)
     {
         for(int j = 0; j<boardState[i].size();j++)
         {
-            if(boardState[i][j].contains(position))
+            if(boardState[i][j]->contains(position))
             {
-                if( boardState[i][j].getOwner() == currentPlayerTurn)
-                    selectHex(boardState[i][j]);
-                else if(boardState[i][j].getState() == HexState::CLOSE)
+                if( boardState[i][j]->getOwner() == currentPlayerTurn)
+                    selectHex(*boardState[i][j]);
+
+                else if(boardState[i][j]->getState() == HexState::CLOSE)
                 {
-                    Move m = Move(*selectedHex, boardState[i][j], false);
+                    Move m = Move(*selectedHex, *boardState[i][j], false);
                     move(m);
                 }
-                else if(boardState[i][j].getState() == HexState::VERY_CLOSE)
+                else if(boardState[i][j]->getState() == HexState::VERY_CLOSE)
                 {
-                    Move m = Move(*selectedHex, boardState[i][j], true);
+                    Move m = Move(*selectedHex, *boardState[i][j], true);
                     move(m);
                 }
             }
@@ -138,7 +139,7 @@ void Board::unselectAllHexes()
     {
         for(int j = 0; j<boardState[i].size();j++)
         {
-            boardState[i][j].setState(HexState::NOTHING);
+            boardState[i][j]->setState(HexState::NOTHING);
         }
     }
 }
@@ -177,17 +178,17 @@ std::map<Hex*,int> Board::findCloseHexes(Hex &h)
     {
         for (int j = 0; j < boardState[i].size(); ++j)
         {
-            if(&boardState[i][j] == &h)
+            if(boardState[i][j] == &h)
                 continue;
-            float d = distance(h.getWindowPosition().x,boardState[i][j].getWindowPosition().x,h.getWindowPosition().y,boardState[i][j].getWindowPosition().y);
+            float d = distance(h.getWindowPosition().x,boardState[i][j]->getWindowPosition().x,h.getWindowPosition().y,boardState[i][j]->getWindowPosition().y);
             d/=radius;
             if(d<=4)
             {
-                mapa[&boardState[i][j]] = (int)d;
+                mapa[boardState[i][j]] = (int)d;
             }
             else
             {
-                boardState[i][j].setState(HexState::NOTHING);
+                boardState[i][j]->setState(HexState::NOTHING);
             }
         }
     }
@@ -231,7 +232,7 @@ void Board::buildBoard()
         {
             if((i==4 && j==3) || (i == 3 && j == 4))
                 continue;
-            boardState[i].push_back(Hex(i,j,radius,window,Owner::NO_ONE));
+            boardState[i].push_back(new Hex(i,j,radius,window,Owner::NO_ONE));
 
         }
     }
@@ -241,28 +242,30 @@ void Board::buildBoard()
         {
             if(i==0 && j == 4)
                 continue;
-            boardState[i+5].push_back(Hex(i+5,j,radius,window,Owner::NO_ONE));
+            boardState[i+5].push_back(new Hex(i+5,j,radius,window,Owner::NO_ONE));
         }
     }
 
 
-    boardState[0][0].setOwner(Owner::PLAYER1);
-    boardState[0][4].setOwner(Owner::PLAYER2);
+    boardState[0][0]->setOwner(Owner::PLAYER1);
+    boardState[0][4]->setOwner(Owner::PLAYER2);
 
-    boardState[4][0].setOwner(Owner::PLAYER2);
-    boardState[4][7].setOwner(Owner::PLAYER1);
+    boardState[4][0]->setOwner(Owner::PLAYER2);
+    boardState[4][7]->setOwner(Owner::PLAYER1);
 
-    boardState[8][0].setOwner(Owner::PLAYER1);
-    boardState[8][4].setOwner(Owner::PLAYER2);
+    boardState[8][0]->setOwner(Owner::PLAYER1);
+    boardState[8][4]->setOwner(Owner::PLAYER2);
 }
 
 void Board::offsetHexes()
 {
+    std::cout<<"Wykonano 1"<<std::endl;
     int xSize = window.getSize().x;
-    int boardSize = boardState[8][0].getWindowPosition().x - boardState[0][0].getWindowPosition().x;
+    std::cout<<"Wykonano 2"<<std::endl;
+    int boardSize = boardState[8][0]->getWindowPosition().x - boardState[0][0]->getWindowPosition().x;
     int remainingSize = xSize - boardSize;
 
-    int distance = boardState[0][0].getWindowPosition().x;
+    int distance = boardState[0][0]->getWindowPosition().x;
     int moveDistance = remainingSize/2 - distance;
 
 
@@ -270,12 +273,12 @@ void Board::offsetHexes()
     {
         for (int j = 0;j<boardState[i].size();j++)
         {
-            boardState[i][j].Move(sf::Vector2<int>(moveDistance,0));
+            boardState[i][j]->Move(sf::Vector2<int>(moveDistance,0));
         }
     }
 }
 
-std::vector<std::vector<Hex>> * Board::getBoardState()
+std::vector<std::vector<Hex *>> * Board::getBoardState()
 {
     return &boardState;
 }

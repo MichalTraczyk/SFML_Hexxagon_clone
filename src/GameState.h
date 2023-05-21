@@ -6,7 +6,7 @@
 #define HEXXAGON_GAMESTATE_H
 
 
-enum class GameState
+enum GameState
 {
     MENU,
     GAME

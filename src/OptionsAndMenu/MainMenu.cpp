@@ -6,47 +6,46 @@
 #include <iostream>
 #include "MainMenu.h"
 
-MainMenu::MainMenu(sf::RenderWindow &w) : window(w)
+MainMenu::MainMenu(sf::RenderWindow &w, GameManager *gm) : window(w), gameManager(gm)
 {
-    MainMenu mm = *this;
     float positionX = w.getSize().x/2;
     positionX-= buttonSize.x/2;
 
     float positionY = 50;
 
     buttons.push_back(
-            new Button("New game",[&mm]()
+            new Button("New game",[this]()
             {
-                mm.NewGameButtonClicked();
+                this->NewGameButtonClicked();
             },sf::Vector2<float>(positionX,positionY),buttonSize));
 
-    positionY += buttonSize.y + buttonSpacing;
-    buttons.push_back(
-            new Button("Load game",[&mm]()
-            {
-                mm.LoadGameButtonClicked();
-            },sf::Vector2<float>(positionX,positionY),buttonSize)
-    );
-    positionY += buttonSize.y + buttonSpacing;
-    buttons.push_back(
-            new Button("Highscores",[&mm]()
-            {
-                mm.HighscoresButtonClicked();
-            },sf::Vector2<float>(positionX,positionY),buttonSize)
-    );
-    positionY += buttonSize.y + buttonSpacing;
-    buttons.push_back(
-            new Button("Chose gamemode",[&mm]()
-            {
-                mm.GamemodeButtonClicked();
-            },sf::Vector2<float>(positionX,positionY),buttonSize)
 
+
+    positionY += buttonSize.y + buttonSpacing;
+    buttons.push_back(
+            new Button("Load game",[this]()
+            {
+                this->LoadGameButtonClicked();
+            },sf::Vector2<float>(positionX,positionY),buttonSize)
+    );
+    positionY += buttonSize.y + buttonSpacing;
+    buttons.push_back(
+            new Button("Highscores",[this]()
+            {
+                this->HighscoresButtonClicked();
+            },sf::Vector2<float>(positionX,positionY),buttonSize)
+    );
+    positionY += buttonSize.y + buttonSpacing;
+    buttons.push_back(
+            new Button("Chose gamemode",[this]()
+            {
+                this->GamemodeButtonClicked();
+            },sf::Vector2<float>(positionX,positionY),buttonSize)
     );
 
-}
-void MainMenu::setGameManager(GameManager* gm)
-{
-    gameManager = gm;
+
+
+
 }
 void MainMenu::Update()
 {
@@ -55,10 +54,10 @@ void MainMenu::Update()
         buttons[i]->draw(window);
     }
 }
-
 void MainMenu::NewGameButtonClicked()
 {
-    std::cout<<"Play button clicked!"<<std::endl;
+    std::cout<<"game manager when starting game: " << gameManager<<std::endl;
+    gameManager->startGame();
 }
 void MainMenu::LoadGameButtonClicked()
 {
@@ -75,4 +74,14 @@ void MainMenu::GamemodeButtonClicked()
 
 bool MainMenu::getAIDecision() {
     return true;
+}
+
+void MainMenu::onMouseButtonClicked(sf::Vector2<float> position)
+{
+    std::cout<<"mouse clicked!"<<std::endl;
+    for(Button *b : buttons)
+    {
+        if(b->contains(position))
+            b->click();
+    }
 }

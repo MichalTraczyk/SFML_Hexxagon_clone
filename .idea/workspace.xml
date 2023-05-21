@@ -21,22 +21,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b50f2bb-e389-413e-bea3-6bb87ea11cd4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/GameManager.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GameManager.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GameState.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-c6edc3b7c4860808d64b.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-05-20T16-05-23-0056.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-Hexxagon-Debug-0682218c003567dee0a7.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Background/Background.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Background/Background.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Background/Background.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Background/Background.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board/Board.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Board.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board/Board.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Board.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board/Hex/Hex.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Hex/Hex.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board/Hex/Hex.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Hex/Hex.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board/Scoreboard.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Scoreboard.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Board/Scoreboard.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Scoreboard.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameManager.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameManager.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameState.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameState.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/Button.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/Button.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/Button.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/Button.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenu.cpp" afterDir="false" />
@@ -97,12 +95,12 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="Hexxagon" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Hexxagon" TARGET_NAME="Hexxagon" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Hexxagon" RUN_TARGET_NAME="Hexxagon">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Hexxagon" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Hexxagon" TARGET_NAME="Hexxagon" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Hexxagon" RUN_TARGET_NAME="Hexxagon">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -138,6 +136,7 @@
       <workItem from="1684598720795" duration="473000" />
       <workItem from="1684604062039" duration="855000" />
       <workItem from="1684687272247" duration="3257000" />
+      <workItem from="1684699619776" duration="7365000" />
     </task>
     <servers />
   </component>

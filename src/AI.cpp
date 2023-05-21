@@ -20,7 +20,7 @@ int AI::calculateMoveValue(Move &m, Board &board)
 }
 void AI::makeBestMove(Board &board)
 {
-    std::vector<std::vector<Hex>> boardState = *board.getBoardState();
+    std::vector<std::vector<Hex*>> boardState = *board.getBoardState();
     int maxVal = 0;
     Move* bestMove = nullptr;
 
@@ -28,18 +28,18 @@ void AI::makeBestMove(Board &board)
     {
         for (int j = 0; j<boardState[i].size(); j++)
         {
-            if(boardState[i][j].getOwner() != Owner::PLAYER2)
+            if(boardState[i][j]->getOwner() != Owner::PLAYER2)
                 continue;
-            auto mapa = board.findPossibleMoves(boardState[i][j]);
+            auto mapa = board.findPossibleMoves(*boardState[i][j]);
             for(auto k : mapa)
             {
                 bool dup = k.second == HexState::VERY_CLOSE;
-                Move m = Move(boardState[i][j],*k.first,dup);
+                Move m = Move(*boardState[i][j],*k.first,dup);
 
                 int val = calculateMoveValue(m,board);
                 if(val > maxVal)
                 {
-                    Move newBest = Move(boardState[i][j],*k.first,dup);
+                    Move newBest = Move(*boardState[i][j],*k.first,dup);
                     bestMove = &newBest;
                 }
             }

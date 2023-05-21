@@ -25,7 +25,7 @@ public:
     void select();
     void unselect();
 
-    bool contains(sf::Vector2<int> pos);
+    bool contains(sf::Vector2<float> pos);
     HexState getState();
 
     void drawHex();

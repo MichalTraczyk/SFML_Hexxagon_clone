@@ -16,7 +16,7 @@ public:
            const sf::Vector2<float> &size);
 
     void click();
-    bool contains(sf::Vector2<float> pos);
+    bool contains(const sf::Vector2<float> &pos);
 
 //on click
 void draw(sf::RenderWindow &window);

@@ -5,7 +5,7 @@
 
 //
 // Created by Michał on 20.05.2023.
-Scoreboard::Scoreboard(sf::RenderWindow &w, std::vector<std::vector<Hex>> &bs) : window(w), boardState(bs){
+Scoreboard::Scoreboard(sf::RenderWindow &w, std::vector<std::vector<Hex*>> &bs) : window(w), boardState(bs){
     buildScoreboard();
     if (!font.loadFromFile("Anton.ttf"))
     {
@@ -65,10 +65,10 @@ void Scoreboard::recalculatePoints()
     {
         for(int j = 0; j<boardState[i].size();j++)
         {
-            if(boardState[i][j].getOwner() == Owner::PLAYER1)
+            if(boardState[i][j]->getOwner() == Owner::PLAYER1)
                 player1Score++;
 
-            if(boardState[i][j].getOwner() == Owner::PLAYER2)
+            if(boardState[i][j]->getOwner() == Owner::PLAYER2)
                 player2Score++;
         }
     }

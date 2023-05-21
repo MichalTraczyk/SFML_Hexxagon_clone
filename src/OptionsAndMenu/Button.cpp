@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "Button.h"
-
+using namespace std;
 
 Button::Button(const std::string &text, std::function<void()> onClick,const sf::Vector2<float> &position,const sf::Vector2<float> &size) : onClick(onClick)
 {
@@ -16,24 +16,15 @@ Button::Button(const std::string &text, std::function<void()> onClick,const sf::
     shape.setSize(size);
     shape.setPosition(position);
 
-    //set text
-    // select the font
-    buttonText.setFont(font); // font is a sf::Font
-
-    // set the string to display
-    //std::string t = std::to_string(h.getPosX()) + " " + std::to_string(h.getPosY());
+    buttonText.setFont(font);
     buttonText.setString(text);
 
     buttonText.setPosition(position.x, position.y);
-    // set the character size
-    buttonText.setCharacterSize(size.y - 2) ; // in pixels, not points!
+    buttonText.setCharacterSize(size.y - 2) ;
 
-    // set the color
     buttonText.setFillColor(sf::Color::Black);
 
-    // set the text style
     buttonText.setStyle(sf::Text::Bold | sf::Text::Underlined);
-    // inside the main loop, between window.clear() and window.display()
 }
 
 void Button::click()
@@ -43,8 +34,9 @@ void Button::click()
         onClick();
     }
 }
-bool Button::contains(const sf::Vector2<float> pos) {
-    return shape.getLocalBounds().contains(pos);
+bool Button::contains(const sf::Vector2<float> &pos)
+{
+    return shape.getGlobalBounds().contains(pos);
 }
 void Button::draw(sf::RenderWindow &window)
 {

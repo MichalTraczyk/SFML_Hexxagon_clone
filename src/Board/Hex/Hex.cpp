@@ -172,7 +172,7 @@ void Hex::generateShape()
     selectObject.setOutlineThickness(4);
 }
 
-bool Hex::contains(sf::Vector2<int> pos)
+bool Hex::contains(sf::Vector2<float> pos)
 {
     sf::Vector2<float> l1 = shape.getPoint(2);
     sf::Vector2<float> l2 = shape.getPoint(5);

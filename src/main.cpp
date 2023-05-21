@@ -6,8 +6,7 @@
 #include "Background/Background.h"
 #include "AI.h"
 #include "OptionsAndMenu/Button.h"
-#include "OptionsAndMenu/MainMenu.h"
-
+#include "GameManager.h"
 int main()
 {
 
@@ -25,7 +24,9 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
             if(event.type == sf::Event::MouseButtonPressed)
-                manager.onMouseButtonClicked(sf::Vector2<int>(event.mouseButton.x, event.mouseButton.y));
+            {
+                manager.onMouseButtonClicked(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+            }
 
         }
         window.clear();

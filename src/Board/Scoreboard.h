@@ -10,7 +10,7 @@
 
 class Scoreboard {
 public:
-    Scoreboard(sf::RenderWindow &w, std::vector<std::vector<Hex>> &bs);
+    Scoreboard(sf::RenderWindow &w, std::vector<std::vector<Hex*>> &bs);
 
     void drawScoreboard();
 
@@ -39,7 +39,7 @@ private:
 
     void recalculatePoints();
 
-    std::vector<std::vector<Hex>> &boardState;
+    std::vector<std::vector<Hex*>> &boardState;
 };
 
 
