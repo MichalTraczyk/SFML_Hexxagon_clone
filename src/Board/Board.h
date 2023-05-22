@@ -14,7 +14,7 @@
 class Board
 {
 public:
-    Board(sf::RenderWindow &w, bool againstAI);
+    Board(sf::RenderWindow &w, bool againstAI,const int &save);
     void drawBoard();
     void OnMouseClicked(sf::Vector2<float> position);
     std::vector<std::vector<Hex *>> * getBoardState();
@@ -22,6 +22,8 @@ public:
     std::map<Hex *, int> findCloseHexes(Hex &h);
     void Update(float deltaTime);
     void move(Move &move);
+
+    void OnEscapeClicked();
 
 private:
     sf::RenderWindow &window;
@@ -37,7 +39,7 @@ private:
 
     //Game logic
     Owner currentPlayerTurn = Owner::PLAYER1;
-    void buildBoard();
+    void buildBoard(const int &save);
     std::vector<std::vector<Hex*>> boardState={
             {},
             {},

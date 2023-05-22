@@ -4,22 +4,18 @@
 
 #include <iostream>
 #include "GameManager.h"
+#include "GameSaver.h"
 
 GameManager::GameManager(sf::RenderWindow &w) : window(w)
 {
     currentGameState=GameState::MENU;
     background =new  Background(window);
     mainMenu = new MainMenu(window,this);
+    GameSaver::getBoardStateFromSave(0);
 }
 void GameManager::Update()
 {
     deltaTime = clock.restart().asSeconds();
-
-    sf::RectangleShape sh = sf::RectangleShape();
-    sh.setSize(sf::Vector2f(100,100));
-    sh.setPosition(0,0);
-    window.draw(sh);
-
     background->drawBackground(deltaTime);
 
     switch (currentGameState) {
@@ -34,7 +30,7 @@ void GameManager::Update()
 void GameManager::startGame()
 {
     bool ai = mainMenu->getAIDecision();
-    board = new Board(window,ai);
+    board = new Board(window,ai,0);
     currentGameState=GameState::GAME;
 }
 void GameManager::onMouseButtonClicked(sf::Vector2<float> position)
@@ -48,3 +44,15 @@ void GameManager::onMouseButtonClicked(sf::Vector2<float> position)
         board->OnMouseClicked(position);
     }
 }
+void GameManager::onEscapeButtonClicked()
+{
+    if(currentGameState == GameState::MENU)
+    {
+        mainMenu->Back();
+    }
+    else if( currentGameState == GameState::GAME)
+    {
+        board->OnEscapeClicked();
+    }
+}
+

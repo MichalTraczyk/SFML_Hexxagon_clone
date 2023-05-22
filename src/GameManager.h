@@ -19,8 +19,8 @@ public:
     void Update();
     void onMouseButtonClicked(sf::Vector2<float> position);
     void startGame();
+    void onEscapeButtonClicked();
 
-    int a = 5;
 private:
     sf::Clock clock;
     float deltaTime;

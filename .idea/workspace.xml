@@ -21,22 +21,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1b50f2bb-e389-413e-bea3-6bb87ea11cd4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/GameSaver.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/GameSaver.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenuState.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/OptionsAndMenu/MenuState.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-fe9dc92c4ba8fa6c4d0f.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2023-05-21T17-27-58-0477.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-Hexxagon-Debug-51a640d60ed89a4b5c4b.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board/Board.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Board.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board/Board.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Board.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board/Hex/Hex.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Hex/Hex.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board/Hex/Hex.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Hex/Hex.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board/Scoreboard.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Scoreboard.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board/Scoreboard.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Scoreboard.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameManager.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GameState.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameState.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/Button.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/Button.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/Button.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/Button.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenu.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenu.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenu.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
@@ -66,25 +67,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Projektycpp/Hexxagon&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;CPPToolchains&quot;,
-    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Projektycpp/Hexxagon",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "CPPToolchains",
+    "structure.view.defaults.are.configured": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Projektycpp\Hexxagon\src\OptionsAndMenu" />
@@ -137,6 +138,9 @@
       <workItem from="1684604062039" duration="855000" />
       <workItem from="1684687272247" duration="3257000" />
       <workItem from="1684699619776" duration="7365000" />
+      <workItem from="1684709183917" duration="381000" />
+      <workItem from="1684709577310" duration="525000" />
+      <workItem from="1684769939780" duration="9413000" />
     </task>
     <servers />
   </component>

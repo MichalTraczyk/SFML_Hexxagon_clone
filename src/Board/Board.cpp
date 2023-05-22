@@ -9,9 +9,10 @@
 #include "Hex/Hex.h"
 #include "vector"
 #include "../AI.h"
+#include "../GameSaver.h"
 #include <thread>
 
-Board::Board(sf::RenderWindow &w, bool againstAI) : window(w), againstAI(againstAI)
+Board::Board(sf::RenderWindow &w, bool againstAI,const int &save) : window(w), againstAI(againstAI)
 {
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
@@ -21,7 +22,7 @@ Board::Board(sf::RenderWindow &w, bool againstAI) : window(w), againstAI(against
         std::cout<<"ERROR LOADING THE FONT";
     }
     //Creates vector of hexes
-    buildBoard();
+    buildBoard(save);
 
     //Offsets hexes so the board is in the middle
     offsetHexes();
@@ -224,7 +225,7 @@ void Board::drawHex(Hex& h)
     h.drawOutline();
 }
 
-void Board::buildBoard()
+void Board::buildBoard(const int &save)
 {
     for(int i = 0;i<5;i++)
     {
@@ -245,16 +246,36 @@ void Board::buildBoard()
             boardState[i+5].push_back(new Hex(i+5,j,radius,window,Owner::NO_ONE));
         }
     }
+    if(save==-1)
+    {
+        boardState[0][0]->setOwner(Owner::PLAYER1);
+        boardState[0][4]->setOwner(Owner::PLAYER2);
 
+        boardState[4][0]->setOwner(Owner::PLAYER2);
+        boardState[4][7]->setOwner(Owner::PLAYER1);
 
-    boardState[0][0]->setOwner(Owner::PLAYER1);
-    boardState[0][4]->setOwner(Owner::PLAYER2);
+        boardState[8][0]->setOwner(Owner::PLAYER1);
+        boardState[8][4]->setOwner(Owner::PLAYER2);
+    }
+    else
+    {
+        std::vector<HexInfo*> hexInfos = GameSaver::getBoardStateFromSave(save);
+        for(int i = 0; i<hexInfos.size();i++)
+        {
+            int py = hexInfos[i]->posy;
+            if((hexInfos[i]->posx == 3 || hexInfos[i]->posx == 5) && py >= 5)
+                py--;
+            if(hexInfos[i]->posx == 4 && py >= 3)
+                py--;
+            if(i==hexInfos.size()-1)
+                currentPlayerTurn = hexInfos[i]->owner;
+            else
+                boardState[hexInfos[i]->posx][py]->setOwner(hexInfos[i]->owner);
+        }
 
-    boardState[4][0]->setOwner(Owner::PLAYER2);
-    boardState[4][7]->setOwner(Owner::PLAYER1);
+        std::cout<<"Last: : "<<hexInfos.back()->posx<<" " <<hexInfos.back()->posy <<std::endl;
 
-    boardState[8][0]->setOwner(Owner::PLAYER1);
-    boardState[8][4]->setOwner(Owner::PLAYER2);
+    }
 }
 
 void Board::offsetHexes()
@@ -281,4 +302,9 @@ void Board::offsetHexes()
 std::vector<std::vector<Hex *>> * Board::getBoardState()
 {
     return &boardState;
+}
+
+void Board::OnEscapeClicked()
+{
+    GameSaver::saveBoardstate(boardState,currentPlayerTurn);
 }

@@ -27,6 +27,10 @@ int main()
             {
                 manager.onMouseButtonClicked(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
             }
+            if(event.type==sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+            {
+                manager.onEscapeButtonClicked();
+            }
 
         }
         window.clear();
