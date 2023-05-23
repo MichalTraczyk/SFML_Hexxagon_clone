@@ -23,40 +23,53 @@ public:
 
     void Back();
 
+    void enableSaveUI(std::vector<std::vector<Hex *>> *s, Owner t);
 private:
-
-    MenuState currentMenuState = MenuState::MAIN_MENU;
-    bool againstAI = false;
-    sf::Font font;
-    MainMenu* thisMenu;
     sf::RenderWindow &window;
     GameManager *gameManager;
-    std::vector<Button*>* buttonsToShow;
+
+    //Game saving
+    std::vector<std::vector<Hex*>>* boardstateToSave = nullptr;
+    Owner turnToSave;
+    void selectSave(int save);
+    void saveGame(int where);
+
+    //Main menu navigation
+    MenuState currentMenuState = MenuState::MAIN_MENU;
+    std::map<MenuState, std::vector<Button*>*> buttonsOfMenuStates;
 
     std::vector<Button*> mainMenuButtons = {};
     std::vector<Button*> loadGameButtons = {};
+    std::vector<Button*> saveGameButtons = {};
     std::vector<Button*> highscoreButtons = {};
     std::vector<Button*> gamemodeButtons = {};
-
     Button* backButton;
 
-    sf::Vector2<float> buttonSize = sf::Vector2<float>(400.0f,50.0f);
 
+    //button vfx
+    const sf::Vector2<float> buttonSize = sf::Vector2<float>(400.0f,50.0f);
     float buttonSpacing = 50;
+    sf::Font font;
+
+
     float buttonTopSpacing = 70;
     void NewGameButtonClicked();
     void LoadGameButtonClicked();
     void HighscoresButtonClicked();
+
+
+
     void GamemodeButtonClicked();
-
     void setupMainMenuButtons();
-
     void setupHighscores();
-
     void setupLoadGame();
-
     void setupGamemode();
 
+    void setupSaveGame();
+
+
+    //AI decision
+    bool againstAI = false;
     void setAIDecision(const bool &newDecision);
 };
 

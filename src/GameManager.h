@@ -18,8 +18,10 @@ public:
     GameManager(sf::RenderWindow &window);
     void Update();
     void onMouseButtonClicked(sf::Vector2<float> position);
-    void startGame();
+    void startGame(int save);
     void onEscapeButtonClicked();
+
+    void onGameSaved();
 
 private:
     sf::Clock clock;

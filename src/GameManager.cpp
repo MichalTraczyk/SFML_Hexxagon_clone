@@ -27,10 +27,10 @@ void GameManager::Update()
             break;
     }
 }
-void GameManager::startGame()
+void GameManager::startGame(int save)
 {
     bool ai = mainMenu->getAIDecision();
-    board = new Board(window,ai,0);
+    board = new Board(window,ai,save);
     currentGameState=GameState::GAME;
 }
 void GameManager::onMouseButtonClicked(sf::Vector2<float> position)
@@ -52,7 +52,12 @@ void GameManager::onEscapeButtonClicked()
     }
     else if( currentGameState == GameState::GAME)
     {
-        board->OnEscapeClicked();
+        currentGameState=GameState::MENU;
+        mainMenu->enableSaveUI(board->getBoardState(),board->getCurrentPlayerTurn());
     }
+}
+void GameManager::onGameSaved()
+{
+    delete board;
 }
 

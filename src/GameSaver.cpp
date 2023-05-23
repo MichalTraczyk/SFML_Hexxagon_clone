@@ -4,21 +4,21 @@
 
 #include "GameSaver.h"
 #include <fstream>
-#include <sstream>
 #include <iostream>
 
-int GameSaver::getNumberOfSavedGames()
+bool GameSaver::doesSavesExist(int saveIndex)
 {
-/*    auto dirIter = filesystem::directory_iterator("directory_path");
-    int fileCount = 0;
-
-    for (auto& entry : dirIter)
+    std::string fileName = "Saves/SaveFile" + std::to_string(saveIndex) + ".hex";
+    auto file = std::fstream(fileName,std::ios::in | std::ios::app);
+    int c=0;
+    for(auto line = std::string() ; std::getline(file, line); )
     {
-        if (entry.is_regular_file())
-        {
-            ++fileCount;
-        }
-    }*/
+        c++;
+        //if file is not empty
+        if(c>1)
+            return true;
+    }
+    return false;
 }
 std::vector<HexInfo*> GameSaver::getBoardStateFromSave(int save)
 {
@@ -43,7 +43,7 @@ std::vector<HexInfo*> GameSaver::getBoardStateFromSave(int save)
 
     return hexInfos;
 }
-void GameSaver::saveBoardstate(const std::vector<std::vector<Hex *>> &boardState, const Owner &playerTurn)
+void GameSaver::saveBoardstate(const std::vector<std::vector<Hex *>> &boardState, const Owner &playerTurn, const int &save)
 {
     std::vector<HexInfo> hexInfos= {};
 
@@ -57,7 +57,7 @@ void GameSaver::saveBoardstate(const std::vector<std::vector<Hex *>> &boardState
     }
 
     hexInfos.push_back(HexInfo(0,0,playerTurn));
-    std::string fileName = "Saves/SaveFile" + std::to_string(0) + ".hex";
+    std::string fileName = "Saves/SaveFile" + std::to_string(save) + ".hex";
     saveHexInfoToFile(hexInfos,fileName);
 }
 
@@ -112,6 +112,10 @@ std::vector<HexInfo*> GameSaver::buildEmptyBoard()
     }
 
     return hexInfos;
+}
+
+int GameSaver::maxSavedGames() {
+    return 3;
 }
 
 HexInfo::HexInfo(int i, int j, Owner owner): posx(i),posy(j),owner(owner){

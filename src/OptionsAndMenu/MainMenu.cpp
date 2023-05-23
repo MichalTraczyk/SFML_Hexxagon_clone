@@ -5,6 +5,7 @@
 #include "MainMenu.h"
 #include <iostream>
 #include "MainMenu.h"
+#include "../GameSaver.h"
 
 MainMenu::MainMenu(sf::RenderWindow &w, GameManager *gm) : window(w), gameManager(gm)
 {
@@ -12,7 +13,8 @@ MainMenu::MainMenu(sf::RenderWindow &w, GameManager *gm) : window(w), gameManage
     setupLoadGame();
     setupHighscores();
     setupGamemode();
-    buttonsToShow = &mainMenuButtons;
+
+    currentMenuState = MenuState::MAIN_MENU;
 
     backButton =
             new Button("Back",[this]()
@@ -24,7 +26,7 @@ MainMenu::MainMenu(sf::RenderWindow &w, GameManager *gm) : window(w), gameManage
 
 void MainMenu::Update()
 {
-    for(Button *b : *buttonsToShow)
+    for(Button *b : *buttonsOfMenuStates[currentMenuState])
     {
         b->draw(window);
     }
@@ -33,8 +35,23 @@ void MainMenu::Update()
 }
 void MainMenu::Back()
 {
-    buttonsToShow = &mainMenuButtons;
     currentMenuState = MenuState::MAIN_MENU;
+}
+
+void MainMenu::enableSaveUI(std::vector<std::vector<Hex*>>* s,Owner t)
+{
+    currentMenuState=MenuState::SAVE_GAME;
+    boardstateToSave = s;
+    turnToSave=t;
+
+
+    for(auto p : saveGameButtons)
+    {
+        delete p;
+    }
+    saveGameButtons.clear();
+
+    setupSaveGame();
 }
 
 //setting up different main menu submenus
@@ -71,6 +88,10 @@ void MainMenu::setupMainMenuButtons()
                 this->GamemodeButtonClicked();
             },sf::Vector2<float>(positionX,positionY),buttonSize)
     );
+
+
+
+    buttonsOfMenuStates[MenuState::MAIN_MENU] = &mainMenuButtons;
 }
 void MainMenu::setupLoadGame()
 {
@@ -78,17 +99,59 @@ void MainMenu::setupLoadGame()
     positionX-= buttonSize.x/2;
 
     float positionY = buttonTopSpacing;
-    for(int i = 0 ; i<3;i++)
+    for(int i = 0 ; i<GameSaver::maxSavedGames();i++)
     {
-        std::string str = "Game " + std::to_string(i+1);
+        int save = -1;
+        std::string str="";
+
+        if(GameSaver::doesSavesExist(i))
+        {
+            str = "save " + std::to_string(i+1);
+            save = i;
+        }
+        else
+        {
+            str = "empty";
+        }
 
         loadGameButtons.push_back(
-                new Button(str,[this]()
+                new Button(str,[this,save]()
                 {
-                    ;
+                    selectSave(save);
                 },sf::Vector2<float>(positionX,positionY),buttonSize));
         positionY += buttonSize.y + buttonSpacing;
     }
+
+    buttonsOfMenuStates[MenuState::LOAD_GAME] = &loadGameButtons;
+}
+void MainMenu::setupSaveGame()
+{
+    float positionX = window.getSize().x/2;
+    positionX-= buttonSize.x/2;
+
+    float positionY = buttonTopSpacing;
+    for(int i = 0 ; i<GameSaver::maxSavedGames();i++)
+    {
+        std::string str="";
+        int save = i;
+        if(GameSaver::doesSavesExist(i))
+        {
+            str = "override " + std::to_string(i+1);
+        }
+        else
+        {
+            str = "empty";
+        }
+
+        saveGameButtons.push_back(
+                new Button(str,[this,save]()
+                {
+                    saveGame(save);
+                },sf::Vector2<float>(positionX,positionY),buttonSize));
+        positionY += buttonSize.y + buttonSpacing;
+    }
+
+    buttonsOfMenuStates[MenuState::SAVE_GAME] = &saveGameButtons;
 }
 void MainMenu::setupHighscores()
 {
@@ -108,6 +171,8 @@ void MainMenu::setupHighscores()
 
         positionY += buttonSize.y + buttonSpacing;
     }
+
+    buttonsOfMenuStates[MenuState::HIGHSCORES] = &highscoreButtons;
 }
 void MainMenu::setupGamemode()
 {
@@ -129,11 +194,13 @@ void MainMenu::setupGamemode()
             {
                 this->setAIDecision(true);
             },sf::Vector2<float>(positionX,positionY),buttonSize));
+
+
+    buttonsOfMenuStates[MenuState::GAMEMODE] = &gamemodeButtons;
 }
 
 
 //On click actions
-
 void MainMenu::onMouseButtonClicked(sf::Vector2<float> position)
 {
     if(backButton->contains(position))
@@ -141,7 +208,7 @@ void MainMenu::onMouseButtonClicked(sf::Vector2<float> position)
         backButton->click();
         return;
     }
-    for(Button *b : *buttonsToShow)
+    for(Button *b : *buttonsOfMenuStates[currentMenuState])
     {
         if(b->contains(position))
         {
@@ -153,22 +220,45 @@ void MainMenu::onMouseButtonClicked(sf::Vector2<float> position)
 
 void MainMenu::NewGameButtonClicked()
 {
-    gameManager->startGame();
+    gameManager->startGame(-1);
 }
 void MainMenu::LoadGameButtonClicked()
 {
-    buttonsToShow = &loadGameButtons;
     currentMenuState = MenuState::LOAD_GAME;
 }
 void MainMenu::HighscoresButtonClicked()
 {
-    buttonsToShow=&highscoreButtons;
     currentMenuState = MenuState::HIGHSCORES;
 }
 void MainMenu::GamemodeButtonClicked()
 {
-    buttonsToShow=&gamemodeButtons;
     currentMenuState = MenuState::GAMEMODE;
+}
+
+
+void MainMenu::selectSave(int save)
+{
+    if(save!=-1)
+        gameManager->startGame(save);
+}
+void MainMenu::saveGame(int where)
+{
+    if(boardstateToSave!= nullptr)
+    {
+        GameSaver::saveBoardstate(*boardstateToSave,turnToSave,where);
+
+        for(auto p : loadGameButtons)
+        {
+            delete p;
+        }
+        loadGameButtons.clear();
+        setupLoadGame();
+
+        gameManager->onGameSaved();
+
+        currentMenuState=MenuState::MAIN_MENU;
+
+    }
 }
 
 

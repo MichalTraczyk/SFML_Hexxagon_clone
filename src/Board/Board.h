@@ -14,6 +14,7 @@
 class Board
 {
 public:
+
     Board(sf::RenderWindow &w, bool againstAI,const int &save);
     void drawBoard();
     void OnMouseClicked(sf::Vector2<float> position);
@@ -22,8 +23,9 @@ public:
     std::map<Hex *, int> findCloseHexes(Hex &h);
     void Update(float deltaTime);
     void move(Move &move);
+    Owner getCurrentPlayerTurn();
 
-    void OnEscapeClicked();
+    virtual ~Board();
 
 private:
     sf::RenderWindow &window;
@@ -52,7 +54,6 @@ private:
             {}
     };
     Hex* selectedHex= nullptr;
-
 
     //visuals
     sf::Font font;

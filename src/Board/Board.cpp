@@ -29,7 +29,6 @@ Board::Board(sf::RenderWindow &w, bool againstAI,const int &save) : window(w), a
 
     //Draws every hex according to its state and position
     drawBoard();
-
     //Scoreboard sc = Scoreboard(w,boardState);
     //scoreboard = sc;
     scoreboard = new Scoreboard(w,boardState);
@@ -280,9 +279,7 @@ void Board::buildBoard(const int &save)
 
 void Board::offsetHexes()
 {
-    std::cout<<"Wykonano 1"<<std::endl;
     int xSize = window.getSize().x;
-    std::cout<<"Wykonano 2"<<std::endl;
     int boardSize = boardState[8][0]->getWindowPosition().x - boardState[0][0]->getWindowPosition().x;
     int remainingSize = xSize - boardSize;
 
@@ -299,12 +296,23 @@ void Board::offsetHexes()
     }
 }
 
-std::vector<std::vector<Hex *>> * Board::getBoardState()
+std::vector<std::vector<Hex *>>* Board::getBoardState()
 {
     return &boardState;
 }
+Owner Board::getCurrentPlayerTurn() {
+    return currentPlayerTurn;
+}
 
-void Board::OnEscapeClicked()
+Board::~Board()
 {
-    GameSaver::saveBoardstate(boardState,currentPlayerTurn);
+    //delete board states
+    for(auto p : boardState)
+    {
+        for(auto a : p)
+        {
+            delete a;
+        }
+        p.clear();
+    }
 }
