@@ -19,15 +19,16 @@ struct HexInfo
 class GameSaver
 {
 public:
-    static int maxSavedGames();
-    static std::vector<HexInfo*> getBoardStateFromSave(int save);
-    static void saveBoardstate(const std::vector<std::vector<Hex*>> &boardState, const Owner &playerTurn,const int &save);
-    static void trySaveNewHighscore(const int &newHighscore,const Owner &owner);
+    const static int maxSavedGames = 6;
     static bool doesSavesExist(int saveNumber);
 
-private:
+    //saving and loading saves
+    static std::vector<HexInfo*> getBoardStateFromSave(int save);
+    static void saveBoardstate(const std::vector<std::vector<Hex*>> &boardState, const Owner &playerTurn,const int &save);
 
-    static std::vector<HexInfo*> buildEmptyBoard();
+
+    static void trySaveNewHighscore(const int &newHighscore,const Owner &owner);
+private:
     static void saveHexInfoToFile(std::vector<HexInfo> &infos,std::string file);
 };
 

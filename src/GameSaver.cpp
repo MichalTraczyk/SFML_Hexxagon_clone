@@ -86,7 +86,7 @@ void GameSaver::saveHexInfoToFile(std::vector<HexInfo> &infos,std::string file)
 void GameSaver::trySaveNewHighscore(const int &newHighscore, const Owner &owner) {
 
 }
-
+/*
 std::vector<HexInfo*> GameSaver::buildEmptyBoard()
 {
     std::vector<HexInfo*> hexInfos={};
@@ -116,7 +116,7 @@ std::vector<HexInfo*> GameSaver::buildEmptyBoard()
 
 int GameSaver::maxSavedGames() {
     return 3;
-}
+}*/
 
 HexInfo::HexInfo(int i, int j, Owner owner): posx(i),posy(j),owner(owner){
 

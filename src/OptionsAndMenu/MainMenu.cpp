@@ -99,7 +99,7 @@ void MainMenu::setupLoadGame()
     positionX-= buttonSize.x/2;
 
     float positionY = buttonTopSpacing;
-    for(int i = 0 ; i<GameSaver::maxSavedGames();i++)
+    for(int i = 0 ; i<GameSaver::maxSavedGames;i++)
     {
         int save = -1;
         std::string str="";
@@ -130,7 +130,7 @@ void MainMenu::setupSaveGame()
     positionX-= buttonSize.x/2;
 
     float positionY = buttonTopSpacing;
-    for(int i = 0 ; i<GameSaver::maxSavedGames();i++)
+    for(int i = 0 ; i<GameSaver::maxSavedGames;i++)
     {
         std::string str="";
         int save = i;
