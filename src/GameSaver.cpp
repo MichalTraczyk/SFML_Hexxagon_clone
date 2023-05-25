@@ -5,6 +5,24 @@
 #include "GameSaver.h"
 #include <fstream>
 #include <iostream>
+#include "sstream"
+#include "algorithm"
+
+void invertedBubbleSort(std::vector<int> &a)
+{
+    bool swapp = true;
+    while(swapp){
+        swapp = false;
+        for (size_t i = 0; i < a.size()-1; i++) {
+            if (a[i]<a[i+1] ){
+                a[i] += a[i+1];
+                a[i+1] = a[i] - a[i+1];
+                a[i] -=a[i+1];
+                swapp = true;
+            }
+        }
+    }
+}
 
 bool GameSaver::doesSavesExist(int saveIndex)
 {
@@ -22,6 +40,8 @@ bool GameSaver::doesSavesExist(int saveIndex)
 }
 std::vector<HexInfo*> GameSaver::getBoardStateFromSave(int save)
 {
+
+
     std::vector<HexInfo*> hexInfos={};
     std::string fileName = "Saves/SaveFile" + std::to_string(save) + ".hex";
 
@@ -82,41 +102,58 @@ void GameSaver::saveHexInfoToFile(std::vector<HexInfo> &infos,std::string file)
     }
 }
 
-
-void GameSaver::trySaveNewHighscore(const int &newHighscore, const Owner &owner) {
-
-}
-/*
-std::vector<HexInfo*> GameSaver::buildEmptyBoard()
+void GameSaver::trySaveNewHighscore(const int &newHighscore, const Owner &owner)
 {
-    std::vector<HexInfo*> hexInfos={};
-    for(int i = 0;i<5;i++)
-    {
-        for (int j = 0; j<i+5;j++)
-        {
-            if((i==4 && j==3) || (i == 3 && j == 4))
-                continue;
-            hexInfos.push_back(new HexInfo(i,j,Owner::NO_ONE));
-            //boardState[i].push_back(new Hex(i,j,radius,window,Owner::NO_ONE));
+    auto v = getHighscores(owner);
 
-        }
+    v.push_back(newHighscore);
+    invertedBubbleSort(v);
+
+    char c = '1';
+    if(owner==Owner::PLAYER2) {
+        c='2';
     }
-    for (int i = 0; i<4;i++)
+    for(int a : v)
     {
-        for(int j = 0; j<8-i;j++)
-        {
-            if(i==0 && j == 4)
-                continue;
-            hexInfos.push_back(new HexInfo(i,j,Owner::NO_ONE));
-        }
+        std::cout<<"int: " << a;
     }
 
-    return hexInfos;
+    saveHighscoreToFile(v,c);
+
 }
+void GameSaver::saveHighscoreToFile(std::vector<int> &v, char owner)
+{
+    std::string s = "Highscores" + std::to_string(owner);
+    auto file = std::fstream(s,std::ios::out);
+    for(int i = 0; i<3;i++)
+    {
+        file << std::to_string(v[i]);
+        file << "\n";
+    }
+    file.close();
+}
+std::vector<int> GameSaver::getHighscores(const Owner &owner)
+{
+    std::vector<int> v = {0,0,0,0,0};
+    char c = '1';
+    if(owner==Owner::PLAYER2)
+        c='2';
 
-int GameSaver::maxSavedGames() {
-    return 3;
-}*/
+    std::string s = "Highscores" + std::to_string(c);
+    auto file = std::fstream(s,std::ios::in | std::ios::app);
+    for(auto line = std::string() ; std::getline(file, line); )
+    {
+        int word;
+        auto strStream = std::stringstream(line);
+        while (strStream >> word)
+        {
+            v.push_back(word);
+        }
+    }
+    file.close();
+    invertedBubbleSort(v);
+    return v;
+}
 
 HexInfo::HexInfo(int i, int j, Owner owner): posx(i),posy(j),owner(owner){
 

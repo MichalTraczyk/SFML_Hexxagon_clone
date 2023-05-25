@@ -28,8 +28,12 @@ public:
 
 
     static void trySaveNewHighscore(const int &newHighscore,const Owner &owner);
+    static std::vector<int> getHighscores(const Owner &owner);
+
 private:
     static void saveHexInfoToFile(std::vector<HexInfo> &infos,std::string file);
+
+    static void saveHighscoreToFile(std::vector<int> &v, char owner);
 };
 
 

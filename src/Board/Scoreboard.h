@@ -15,6 +15,7 @@ public:
     void drawScoreboard();
 
     void calculateScoreboard();
+    sf::Vector2<int> getScore();
 
 private:
     sf::Font font;

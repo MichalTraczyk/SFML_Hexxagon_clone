@@ -31,6 +31,7 @@ void AI::makeBestMove(Board &board)
             if(boardState[i][j]->getOwner() != Owner::PLAYER2)
                 continue;
             auto mapa = board.findPossibleMoves(*boardState[i][j]);
+
             for(auto k : mapa)
             {
                 bool dup = k.second == HexState::VERY_CLOSE;

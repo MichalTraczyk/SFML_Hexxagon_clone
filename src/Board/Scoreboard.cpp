@@ -73,3 +73,6 @@ void Scoreboard::recalculatePoints()
         }
     }
 }
+sf::Vector2<int> Scoreboard::getScore() {
+    return sf::Vector2<int>(player1Score,player2Score);
+}

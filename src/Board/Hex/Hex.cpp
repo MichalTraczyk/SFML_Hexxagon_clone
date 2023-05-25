@@ -185,3 +185,9 @@ bool Hex::contains(sf::Vector2<float> pos)
     else
         return false;
 }
+
+Hex::~Hex()
+{
+    std::cout<<"HEX DECONSTURCOT"<<std::endl;
+    //delete this;
+}

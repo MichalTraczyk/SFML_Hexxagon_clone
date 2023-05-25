@@ -7,13 +7,11 @@
 #include "AI.h"
 #include "OptionsAndMenu/Button.h"
 #include "GameManager.h"
+#include "GameSaver.h"
+
 int main()
 {
-
     sf::RenderWindow window(sf::VideoMode(1600, 900), "SFML works!");
-
-    //Board b = Board(window,true);
-    //Background background = Background(window);
 
     GameManager manager = GameManager(window);
     while (window.isOpen())
@@ -30,6 +28,10 @@ int main()
             if(event.type==sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
             {
                 manager.onEscapeButtonClicked();
+            }
+            if(event.type==sf::Event::KeyPressed && event.key.code == sf::Keyboard::E)
+            {
+                manager.onGameFinished();
             }
 
         }

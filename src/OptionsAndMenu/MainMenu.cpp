@@ -38,22 +38,6 @@ void MainMenu::Back()
     currentMenuState = MenuState::MAIN_MENU;
 }
 
-void MainMenu::enableSaveUI(std::vector<std::vector<Hex*>>* s,Owner t)
-{
-    currentMenuState=MenuState::SAVE_GAME;
-    boardstateToSave = s;
-    turnToSave=t;
-
-
-    for(auto p : saveGameButtons)
-    {
-        delete p;
-    }
-    saveGameButtons.clear();
-
-    setupSaveGame();
-}
-
 //setting up different main menu submenus
 void MainMenu::setupMainMenuButtons()
 {
@@ -83,7 +67,7 @@ void MainMenu::setupMainMenuButtons()
     );
     positionY += buttonSize.y + buttonSpacing;
     mainMenuButtons.push_back(
-            new Button("Chose gamemode",[this]()
+            new Button("Choose gamemode",[this]()
             {
                 this->GamemodeButtonClicked();
             },sf::Vector2<float>(positionX,positionY),buttonSize)
@@ -93,6 +77,8 @@ void MainMenu::setupMainMenuButtons()
 
     buttonsOfMenuStates[MenuState::MAIN_MENU] = &mainMenuButtons;
 }
+
+
 void MainMenu::setupLoadGame()
 {
     float positionX = window.getSize().x/2;
@@ -155,13 +141,59 @@ void MainMenu::setupSaveGame()
 }
 void MainMenu::setupHighscores()
 {
-    float positionX = window.getSize().x/2;
-    positionX-= buttonSize.x/2;
+    //float positionX = window.getSize().x/2;
+    float positionX = window.getSize().x/2 - buttonSize.x- buttonSpacing/2;
 
+
+    //player 1 highscores
     float positionY = buttonTopSpacing;
-    for(int i = 0 ; i<3;i++)
+
+    highscoreButtons.push_back(
+            new Button("Player 1: ",[]()
+            {
+                ;
+            },sf::Vector2<float>(positionX,positionY),buttonSize));
+
+    positionY += buttonSize.y + buttonSpacing;
+    auto vecP1 = GameSaver::getHighscores(Owner::PLAYER1);
+    for(int i = 0 ; i<5;i++)
     {
-        std::string str = "Highscore: " + std::to_string(i+1);
+        int o = vecP1[i];
+        std::string str = "";
+        if(o==0)
+            str="Not set";
+        else
+            str = std::to_string(o) + " points";
+
+        highscoreButtons.push_back(
+                new Button(str,[]()
+                {
+                    ;
+                },sf::Vector2<float>(positionX,positionY),buttonSize));
+
+        positionY += buttonSize.y + buttonSpacing;
+    }
+
+    //player 2 highscores
+    positionY = buttonTopSpacing;
+    positionX = window.getSize().x/2 + buttonSpacing/2;
+
+    highscoreButtons.push_back(
+            new Button("Player 2: ",[]()
+            {
+                ;
+            },sf::Vector2<float>(positionX,positionY),buttonSize));
+
+    positionY += buttonSize.y + buttonSpacing;
+    auto vecP2 = GameSaver::getHighscores(Owner::PLAYER2);
+    for(int i = 0 ; i<5;i++)
+    {
+        int o = vecP2[i];
+        std::string str = "";
+        if(o==0)
+            str="Not set";
+        else
+            str = std::to_string(o) + " points";
 
         highscoreButtons.push_back(
                 new Button(str,[this]()
@@ -171,6 +203,8 @@ void MainMenu::setupHighscores()
 
         positionY += buttonSize.y + buttonSpacing;
     }
+
+
 
     buttonsOfMenuStates[MenuState::HIGHSCORES] = &highscoreButtons;
 }
@@ -198,9 +232,39 @@ void MainMenu::setupGamemode()
 
     buttonsOfMenuStates[MenuState::GAMEMODE] = &gamemodeButtons;
 }
+void MainMenu::setupEndgame(sf::Vector2<int> stats)
+{
+    endgameButtons.clear();
+    float positionX = window.getSize().x/2;
+
+    positionX += buttonSize.x/2 + buttonSpacing/2;
+    positionX-= buttonSize.x/2;
+
+    float positionY = buttonTopSpacing;
+
+    std::string str1 = std::to_string(stats.x);
+    std::string str2 = std::to_string(stats.y);
 
 
+    endgameButtons.push_back(
+            new Button(str1,[]()
+            {
+
+            },sf::Vector2<float>(positionX,positionY),buttonSize));
+
+    positionX -= (buttonSize.x + buttonSpacing);
+    endgameButtons.push_back(
+            new Button(str2,[]()
+            {
+
+            },sf::Vector2<float>(positionX,positionY),buttonSize));
+
+
+    buttonsOfMenuStates[MenuState::ENDGAME] = &endgameButtons;
+}
 //On click actions
+
+
 void MainMenu::onMouseButtonClicked(sf::Vector2<float> position)
 {
     if(backButton->contains(position))
@@ -269,4 +333,32 @@ void MainMenu::setAIDecision(const bool &newDecision)
 }
 bool MainMenu::getAIDecision() {
     return againstAI;
+}
+
+//called from game manager
+void MainMenu::enableGameFinishedUI(sf::Vector2<int> stats)
+{
+    setupEndgame(stats);
+    for(auto p : highscoreButtons)
+    {
+        delete p;
+    }
+    highscoreButtons.clear();
+    setupHighscores();
+    currentMenuState=MenuState::ENDGAME;
+}
+void MainMenu::enableSaveUI(std::vector<std::vector<Hex*>>* s,Owner t)
+{
+    currentMenuState=MenuState::SAVE_GAME;
+    boardstateToSave = s;
+    turnToSave=t;
+
+
+    for(auto p : saveGameButtons)
+    {
+        delete p;
+    }
+    saveGameButtons.clear();
+
+    setupSaveGame();
 }

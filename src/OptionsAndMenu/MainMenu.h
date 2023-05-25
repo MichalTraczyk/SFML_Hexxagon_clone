@@ -10,6 +10,7 @@ class GameManager;
 #include "Button.h"
 #include "MenuState.h"
 
+
 class MainMenu {
 
 public:
@@ -24,6 +25,7 @@ public:
     void Back();
 
     void enableSaveUI(std::vector<std::vector<Hex *>> *s, Owner t);
+    void enableGameFinishedUI(sf::Vector2<int> stats);
 private:
     sf::RenderWindow &window;
     GameManager *gameManager;
@@ -43,6 +45,7 @@ private:
     std::vector<Button*> saveGameButtons = {};
     std::vector<Button*> highscoreButtons = {};
     std::vector<Button*> gamemodeButtons = {};
+    std::vector<Button*> endgameButtons = {};
     Button* backButton;
 
 
@@ -71,6 +74,9 @@ private:
     //AI decision
     bool againstAI = false;
     void setAIDecision(const bool &newDecision);
+
+    void setupEndgame(sf::Vector2<int> vector2);
+
 };
 
 

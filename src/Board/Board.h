@@ -10,12 +10,13 @@
 #include "../Owner.h"
 #include "../Move.h"
 #include "Scoreboard.h"
+class GameManager;
+#include "../GameManager.h"
 
 class Board
 {
 public:
-
-    Board(sf::RenderWindow &w, bool againstAI,const int &save);
+    Board(sf::RenderWindow &w, bool againstAI,GameManager* gm,const int &save);
     void drawBoard();
     void OnMouseClicked(sf::Vector2<float> position);
     std::vector<std::vector<Hex *>> * getBoardState();
@@ -24,14 +25,17 @@ public:
     void Update(float deltaTime);
     void move(Move &move);
     Owner getCurrentPlayerTurn();
-
     virtual ~Board();
+
+    void onNoMoreMoves();
+
+    sf::Vector2<int> getScores();
 
 private:
     sf::RenderWindow &window;
-
     //Scoreboard
     Scoreboard* scoreboard;
+    GameManager* gameManager;
 
     //Ai
     bool againstAI;
@@ -42,6 +46,8 @@ private:
     //Game logic
     Owner currentPlayerTurn = Owner::PLAYER1;
     void buildBoard(const int &save);
+
+
     std::vector<std::vector<Hex*>> boardState={
             {},
             {},
@@ -53,6 +59,7 @@ private:
             {},
             {}
     };
+
     Hex* selectedHex= nullptr;
 
     //visuals
@@ -66,5 +73,8 @@ private:
     void selectHex(Hex &h);
     void unselectAllHexes();
 
+    void fillEmptyHexes(Owner toFill);
+
+    bool CanMove(Owner player);
 };
 #endif //HEXXAGON_BOARD_H

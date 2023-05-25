@@ -11,7 +11,8 @@ enum class MenuState {
     LOAD_GAME,
     SAVE_GAME,
     HIGHSCORES,
-    GAMEMODE
+    GAMEMODE,
+    ENDGAME
 };
 
 

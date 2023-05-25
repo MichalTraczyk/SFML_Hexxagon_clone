@@ -11,6 +11,7 @@
 class Hex
 {
 public:
+    ~Hex();
     Hex(int posX,int posY, const int &radius,sf::RenderWindow &window,Owner owner = Owner::PLAYER1);
 
     int getPosX();

@@ -30,7 +30,7 @@ void GameManager::Update()
 void GameManager::startGame(int save)
 {
     bool ai = mainMenu->getAIDecision();
-    board = new Board(window,ai,save);
+    board = new Board(window,ai,this,save);
     currentGameState=GameState::GAME;
 }
 void GameManager::onMouseButtonClicked(sf::Vector2<float> position)
@@ -55,6 +55,22 @@ void GameManager::onEscapeButtonClicked()
         currentGameState=GameState::MENU;
         mainMenu->enableSaveUI(board->getBoardState(),board->getCurrentPlayerTurn());
     }
+}
+void GameManager::onGameFinished()
+{
+    std::cout<<"3"<<std::endl;
+    sf::Vector2<int> scores = board->getScores();
+
+    std::cout<<"4"<<std::endl;
+
+    currentGameState=GameState::MENU;
+
+    std::cout<<"5"<<std::endl;
+    mainMenu->enableGameFinishedUI(scores);
+    GameSaver::trySaveNewHighscore(scores.x,Owner::PLAYER1);
+    GameSaver::trySaveNewHighscore(scores.y,Owner::PLAYER2);
+    std::cout<<"6"<<std::endl;
+    delete board;
 }
 void GameManager::onGameSaved()
 {
