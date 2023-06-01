@@ -26,7 +26,7 @@ void invertedBubbleSort(std::vector<int> &a)
 
 bool GameSaver::doesSavesExist(int saveIndex)
 {
-    std::string fileName = "Saves/SaveFile" + std::to_string(saveIndex) + ".hex";
+    std::string fileName = "SaveFile" + std::to_string(saveIndex) + ".hex";
     auto file = std::fstream(fileName,std::ios::in | std::ios::app);
     int c=0;
     for(auto line = std::string() ; std::getline(file, line); )
@@ -43,7 +43,7 @@ std::vector<HexInfo*> GameSaver::getBoardStateFromSave(int save)
 
 
     std::vector<HexInfo*> hexInfos={};
-    std::string fileName = "Saves/SaveFile" + std::to_string(save) + ".hex";
+    std::string fileName = "SaveFile" + std::to_string(save) + ".hex";
 
     auto file = std::fstream(fileName);
     for(auto line = std::string() ; std::getline(file, line); ){
@@ -77,7 +77,7 @@ void GameSaver::saveBoardstate(const std::vector<std::vector<Hex *>> &boardState
     }
 
     hexInfos.push_back(HexInfo(0,0,playerTurn));
-    std::string fileName = "Saves/SaveFile" + std::to_string(save) + ".hex";
+    std::string fileName = "SaveFile" + std::to_string(save) + ".hex";
     saveHexInfoToFile(hexInfos,fileName);
 }
 
@@ -125,7 +125,7 @@ void GameSaver::saveHighscoreToFile(std::vector<int> &v, char owner)
 {
     std::string s = "Highscores" + std::to_string(owner);
     auto file = std::fstream(s,std::ios::out);
-    for(int i = 0; i<3;i++)
+    for(int i = 0; i<5;i++)
     {
         file << std::to_string(v[i]);
         file << "\n";

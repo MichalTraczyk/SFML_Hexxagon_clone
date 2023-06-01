@@ -174,16 +174,14 @@ void Hex::generateShape()
 
 bool Hex::contains(sf::Vector2<float> pos)
 {
-    sf::Vector2<float> l1 = shape.getPoint(2);
-    sf::Vector2<float> l2 = shape.getPoint(5);
+    int x = abs(pos.x-windowXPosition);
+    int y = abs(pos.y-windowYPosition);
 
-    l1 = outline.getTransform().transformPoint(l1);
-    l2 = outline.getTransform().transformPoint(l2);
+    float c = x*x + y*y;
+    c = sqrt(c);
 
-    if(pos.x >= l1.x && pos.x <= l2.x && pos.y >= l2.y && pos.y <= l1.y)
-        return true;
-    else
-        return false;
+    float h = radius * 1.73 /2;
+    return c<h;
 }
 
 Hex::~Hex()

@@ -32,6 +32,7 @@ Board::Board(sf::RenderWindow &w, bool againstAI,GameManager* gm,const int &save
     //Scoreboard sc = Scoreboard(w,boardState);
     //scoreboard = sc;
     scoreboard = new Scoreboard(w,boardState);
+    scoreboard->calculateScoreboard();
 
 }
 void Board::Update(float deltaTime)
@@ -354,24 +355,6 @@ std::vector<std::vector<Hex *>>* Board::getBoardState()
 Owner Board::getCurrentPlayerTurn() {
     return currentPlayerTurn;
 }
-Board::~Board()
-{
-    std::cout<<"del1"<<std::endl;
-    //delete scoreboard;
-    std::cout<<"del2"<<std::endl;
-
-    //delete board states
-/*    for(int i = 0; i<boardState.size();i++)
-    {
-        for(int j = 0; j<boardState.at(i).size();i++)
-        {
-            std::cout<<"board: " << boardState[i][j]->getPosX() << std::endl;
-            //delete boardState.at(i).at(j);
-        }
-    }*/
-    std::cout<<"del3"<<std::endl;
-}
-
 sf::Vector2<int> Board::getScores() {
     return scoreboard->getScore();
 }

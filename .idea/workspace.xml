@@ -24,25 +24,31 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Highscores49" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Highscores50" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile0.hex" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile0.hex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile3.hex" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile3.hex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile4.hex" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile4.hex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile5.hex" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile5.hex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile0.hex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile1.hex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile2.hex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile3.hex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile4.hex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/saves/SaveFile5.hex" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AI.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/AI.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Background/Background.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Background/Background.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Background/Star.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Background/Star.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board/Board.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Board.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board/Board.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Board.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board/Hex/Hex.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Hex/Hex.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board/Hex/Hex.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Hex/Hex.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Board/Scoreboard.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Scoreboard.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board/Scoreboard.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board/Scoreboard.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameManager.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameManager.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameManager.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameManager.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameSaver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameSaver.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GameSaver.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameSaver.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenu.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Move.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Move.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/Button.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/Button.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenu.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/MainMenu.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OptionsAndMenu/MenuState.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/OptionsAndMenu/MenuState.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,7 +147,14 @@
       <workItem from="1684769939780" duration="9413000" />
       <workItem from="1684871516451" duration="4205000" />
       <workItem from="1684947711824" duration="14776000" />
-      <workItem from="1685022979663" duration="3626000" />
+      <workItem from="1685022979663" duration="11878000" />
+      <workItem from="1685202487197" duration="45000" />
+      <workItem from="1685385272695" duration="2169000" />
+      <workItem from="1685560826104" duration="47000" />
+      <workItem from="1685561679347" duration="208000" />
+      <workItem from="1685623422797" duration="5300000" />
+      <workItem from="1685630277056" duration="912000" />
+      <workItem from="1685631321123" duration="2710000" />
     </task>
     <servers />
   </component>

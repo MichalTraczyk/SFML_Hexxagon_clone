@@ -38,13 +38,17 @@ void AI::makeBestMove(Board &board)
                 Move m = Move(*boardState[i][j],*k.first,dup);
 
                 int val = calculateMoveValue(m,board);
+
                 if(val > maxVal)
                 {
-                    Move newBest = Move(*boardState[i][j],*k.first,dup);
-                    bestMove = &newBest;
+                    maxVal = val;
+                    delete bestMove;
+                    bestMove = new Move(*boardState[i][j],*k.first,dup);;
+
                 }
             }
         }
     }
     board.move(*bestMove);
+    delete bestMove;
 }

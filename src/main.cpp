@@ -1,11 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include "Board/Board.h"
-#include "Board/Hex/Hex.h"
-#include "iostream"
-#include "Owner.h"
-#include "Background/Background.h"
-#include "AI.h"
-#include "OptionsAndMenu/Button.h"
 #include "GameManager.h"
 #include "GameSaver.h"
 
@@ -29,11 +23,6 @@ int main()
             {
                 manager.onEscapeButtonClicked();
             }
-            if(event.type==sf::Event::KeyPressed && event.key.code == sf::Keyboard::E)
-            {
-                manager.onGameFinished();
-            }
-
         }
         window.clear();
 
